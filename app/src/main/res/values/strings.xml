@@ -12,4 +12,10 @@
     <string name="belajar_sambil_bermain">Belajar Sambil Bermain</string>
     <string name="mulai_latihan">Mulai Latihan!</string>
     <string name="back">Back</string>
+    <string name="profile_photo">Profile Photo</string>
+    <string name="change_name">Ubah Nama</string>
+    <string name="change_email">Ubah Email</string>
+    <string name="change_password">Ubah Password</string>
+    <string name="logout">Keluar</string>
+    <string name="good">Bagus</string>
 </resources>

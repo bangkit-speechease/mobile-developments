@@ -25,6 +25,7 @@
         android:id="@+id/img_practice"
         android:layout_width="300dp"
         android:layout_height="300dp"
+        android:contentDescription="@string/practice"
         android:src="@drawable/virtual"
         android:layout_marginTop="150dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -49,7 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:textStyle="bold"
-        android:text="Bagus"
+        android:text="@string/good"
         app:layout_constraintEnd_toEndOf="@+id/btn_mic"
         app:layout_constraintStart_toStartOf="@+id/btn_mic"
         app:layout_constraintTop_toBottomOf="@+id/btn_mic" />
