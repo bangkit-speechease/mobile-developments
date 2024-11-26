@@ -4,11 +4,14 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiConfig {
-    fun getApiService(): ApiService {
+    private const val BASE_URL = "http://10.0.2.2:5000/" // URL Flask
+
+    val instance: ApiService by lazy {
         val retrofit = Retrofit.Builder()
-            .baseUrl(" ")
+            .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-        return retrofit.create(ApiService::class.java)
+
+        retrofit.create(ApiService::class.java)
     }
 }
