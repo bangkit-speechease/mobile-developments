@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.cardview.widget.CardView
 import com.example.speechease.R
 import com.example.speechease.databinding.FragmentHomeBinding
 import com.example.speechease.ui.interactive.InteractiveActivity
@@ -33,8 +32,11 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.progress.setOnClickListener {
-            val intent = Intent(requireContext(), ProgressFragment::class.java)
-            startActivity(intent)
+            val fragment = ProgressFragment()
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainerView, fragment)
+                .addToBackStack(null)
+                .commit()
         }
 
         binding.cardLatihan.setOnClickListener {
