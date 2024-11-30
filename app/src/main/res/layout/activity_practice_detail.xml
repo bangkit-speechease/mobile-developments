@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />-->
 
     <ImageButton
-        android:id="@+id/menuButton"
+        android:id="@+id/backButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -32,7 +32,7 @@
         android:src="@drawable/baseline_arrow_back_ios_new_24"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/white" />
+        app:tint="@color/green2" />
 
     <ImageView
         android:id="@+id/img_practice"
@@ -49,7 +49,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginBottom="100dp"
-        android:backgroundTint="@color/green2"
+        android:backgroundTint="@color/green1"
         app:icon="@drawable/baseline_mic_24"
         app:iconSize="55dp"
         app:iconPadding="0dp"

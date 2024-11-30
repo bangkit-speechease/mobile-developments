@@ -29,7 +29,7 @@ class NameEditText : AppCompatEditText {
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        hint = context.getString(R.string.name)
+        hint = context.getString(R.string.nameSignup)
         textAlignment = View.TEXT_ALIGNMENT_VIEW_START
     }
 

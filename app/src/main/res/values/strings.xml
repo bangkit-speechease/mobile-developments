@@ -21,4 +21,6 @@
     <string name="email_error">Alamat Email Tidak Valid</string>
     <string name="signup">Daftar</string>
     <string name="login">Masuk</string>
+    <string name="title_signup_page">Lengkapi data dirimu di bawah ini ya</string>
+    <string name="nameSignup">Name</string>
 </resources>
