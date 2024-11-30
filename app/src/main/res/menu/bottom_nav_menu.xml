@@ -5,10 +5,6 @@
         android:icon="@drawable/baseline_home_24"
         android:title="@string/home" />
     <item
-        android:id="@+id/nav_practice"
-        android:icon="@drawable/baseline_mic_24"
-        android:title="@string/practice" />
-    <item
         android:id="@+id/nav_progress"
         android:icon="@drawable/baseline_access_time_24"
         android:title="@string/progress" />

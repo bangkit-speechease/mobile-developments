@@ -7,7 +7,6 @@ import com.example.speechease.databinding.ActivityMainBinding
 import com.example.speechease.ui.home.HomeFragment
 import com.example.speechease.ui.profile.ProfileFragment
 import com.example.speechease.ui.progress.ProgressFragment
-import com.example.speechease.ui.practice.PracticeFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -24,7 +23,6 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_home -> loadFragment(HomeFragment())
-                R.id.nav_practice -> loadFragment(PracticeFragment())
                 R.id.nav_progress -> loadFragment(ProgressFragment())
                 R.id.nav_profile -> loadFragment(ProfileFragment())
             }
