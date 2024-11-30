@@ -13,6 +13,12 @@
         android:theme="@style/Theme.SpeechEase"
         tools:targetApi="31">
         <activity
+            android:name=".ui.interactive.InteractiveActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.practice.PracticeActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.feedback.FeedbackActivity"
             android:exported="false" />
         <activity
