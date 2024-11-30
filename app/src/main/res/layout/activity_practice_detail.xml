@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.practicedetail.PracticeDetailActivity">
 
-    <com.google.android.material.button.MaterialButton
+    <!--<com.google.android.material.button.MaterialButton
         android:id="@+id/btn_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -19,7 +19,20 @@
         android:layout_marginTop="32dp"
         android:contentDescription="@string/back"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />-->
+
+    <ImageButton
+        android:id="@+id/menuButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/rounded_button"
+        android:padding="16dp"
+        android:src="@drawable/baseline_arrow_back_ios_new_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/white" />
 
     <ImageView
         android:id="@+id/img_practice"
@@ -36,6 +49,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginBottom="100dp"
+        android:backgroundTint="@color/green2"
         app:icon="@drawable/baseline_mic_24"
         app:iconSize="55dp"
         app:iconPadding="0dp"

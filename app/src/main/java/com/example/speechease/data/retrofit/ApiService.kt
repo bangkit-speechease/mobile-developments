@@ -8,6 +8,8 @@ import retrofit2.http.POST
 import retrofit2.http.Part
 
 interface ApiService {
+
+    // Endpoint untuk mengunggah file audio dan mendapatkan prediksi
     @Multipart
     @POST("predict")
     fun uploadAudio(
