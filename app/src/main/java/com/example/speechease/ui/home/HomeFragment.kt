@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.speechease.MainActivity
 import com.example.speechease.R
 import com.example.speechease.databinding.FragmentHomeBinding
 import com.example.speechease.ui.interactive.InteractiveActivity
@@ -31,12 +32,23 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.navigateToFragment.observe(viewLifecycleOwner) { destinationId ->
+            destinationId?.let {
+                when (it) {
+                    R.id.nav_progress -> {
+                        val fragment = ProgressFragment()
+                        parentFragmentManager.beginTransaction()
+                            .replace(R.id.fragmentContainerView, fragment)
+                            .commit()
+                        (requireActivity() as MainActivity).binding.bottomNavigationView.selectedItemId = it
+                    }
+                }
+                viewModel.resetNavigation()
+            }
+        }
+
         binding.progress.setOnClickListener {
-            val fragment = ProgressFragment()
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainerView, fragment)
-                .addToBackStack(null)
-                .commit()
+            viewModel.navigateTo(R.id.nav_progress)
         }
 
         binding.cardLatihan.setOnClickListener {
