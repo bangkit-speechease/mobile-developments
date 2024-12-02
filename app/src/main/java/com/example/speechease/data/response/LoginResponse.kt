@@ -1,14 +1,14 @@
 package com.example.speechease.data.response
 
 data class LoginResponse(
-    val status: String,
-    val message: String,
     val error: Boolean,
-    val data: UserData
+    val message: String,
+    val data: LoginData?
 )
 
-data class UserData(
+data class LoginData(
     val userId: String,
     val name: String,
+    val email: String,
     val token: String
 )
