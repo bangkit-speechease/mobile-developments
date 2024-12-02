@@ -32,4 +32,7 @@
     <string name="logout">Keluar</string>
     <string name="good">Bagus</string>
 
+    <string name="speech_detection">Speech, Detection</string>
+    <string name="image_action">Image, Action</string>
+    <string name="selamat_datang">Selamat Datang</string>
 </resources>
