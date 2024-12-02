@@ -1,15 +1,13 @@
 package com.example.speechease.data.response
 
-import com.google.gson.annotations.SerializedName
-
 data class UserDetailResponse(
+    val error: Boolean,
+    val message: String,
+    val data: UserDetailData?
+)
 
-	@field:SerializedName("message")
-	val message: String? = null,
-
-	@field:SerializedName("error")
-	val error: Boolean? = null,
-
-	@field:SerializedName("status")
-	val status: String? = null
+data class UserDetailData(
+    val userId: String,
+    val name: String,
+    val email: String
 )
