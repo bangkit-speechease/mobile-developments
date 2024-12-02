@@ -11,7 +11,7 @@ import com.example.speechease.MainActivity
 import com.example.speechease.R
 import com.example.speechease.databinding.FragmentHomeBinding
 import com.example.speechease.ui.interactive.InteractiveActivity
-import com.example.speechease.ui.practice.PracticeActivity
+import com.example.speechease.ui.practicedetail.PracticeDetailActivity
 import com.example.speechease.ui.progress.ProgressFragment
 
 class HomeFragment : Fragment() {
@@ -52,7 +52,7 @@ class HomeFragment : Fragment() {
         }
 
         binding.cardLatihan.setOnClickListener {
-            val intent = Intent(requireContext(), PracticeActivity::class.java)
+            val intent = Intent(requireContext(), PracticeDetailActivity::class.java)
             startActivity(intent)
         }
 

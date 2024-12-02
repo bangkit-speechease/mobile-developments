@@ -7,20 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.practicedetail.PracticeDetailActivity">
 
-    <!--<com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:minWidth="0dp"
-        app:iconPadding="8dp"
-        app:icon="@drawable/baseline_arrow_back_24"
-        android:text="@string/back"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:contentDescription="@string/back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />-->
-
     <ImageButton
         android:id="@+id/backButton"
         android:layout_width="wrap_content"

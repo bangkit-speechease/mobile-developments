@@ -55,13 +55,14 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     // retrofit
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.9.0")
+    implementation(libs.retrofit.v2110)
+    implementation(libs.converter.gson.v2110)
+    implementation(libs.logging.interceptor)
 
     // glide
     implementation(libs.glide)
     annotationProcessor(libs.compiler)
 
     implementation(libs.material)
+    implementation (libs.androidx.lifecycle.runtime.ktx)
 }
