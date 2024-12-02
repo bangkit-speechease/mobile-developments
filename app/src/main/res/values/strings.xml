@@ -35,4 +35,7 @@
     <string name="speech_detection">Speech, Detection</string>
     <string name="image_action">Image, Action</string>
     <string name="selamat_datang">Selamat Datang</string>
+    <string name="latihan_7_10_selesai">Latihan: 7/10 Selesai</string>
+    <string name="star">star</string>
+    <string name="vector">vector</string>
 </resources>

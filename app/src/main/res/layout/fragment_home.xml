@@ -70,6 +70,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:contentDescription="@string/star"
                 android:src="@drawable/baseline_star_24"
                 app:layout_constraintStart_toStartOf="@+id/textView3"
                 app:layout_constraintTop_toBottomOf="@+id/textView3" />
@@ -79,7 +80,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="Latihan: 7/10 Selesai"
+                android:text="@string/latihan_7_10_selesai"
                 android:textColor="#003A3A"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -133,6 +134,7 @@
                 android:layout_width="160dp"
                 android:layout_height="160dp"
                 android:layout_marginTop="8dp"
+                android:contentDescription="@string/vector"
                 android:src="@drawable/latihan"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -190,6 +192,7 @@
                 android:layout_height="160dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
+                android:contentDescription="@string/vector"
                 android:src="@drawable/interaktif"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
