@@ -12,12 +12,26 @@
     <string name="belajar_sambil_bermain">Belajar Sambil Bermain</string>
     <string name="mulai_latihan">Mulai Latihan!</string>
     <string name="back">Back</string>
+
+    <string name="welcome_page">Selamat Datang! Ayo mulai perjalanan belajar yang penuh semangat bersama kami, di mana anak-anak dapat berlatih berbicara dengan cara yang mudah dipahami dan interaktif.</string>
+    <string name="message_login_page">Masukkan dulu datamu ya</string>
+    <string name="title_login_page">Sudah siap untuk belajar?</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="password_error">Password tidak boleh kurang dari 8 karakter</string>
+    <string name="email_error">Alamat Email Tidak Valid</string>
+    <string name="signup">Daftar</string>
+    <string name="login">Masuk</string>
+    <string name="title_signup_page">Lengkapi data dirimu di bawah ini ya</string>
+    <string name="nameSignup">Name</string>
+
     <string name="profile_photo">Profile Photo</string>
     <string name="change_name">Ubah Nama</string>
     <string name="change_email">Ubah Email</string>
     <string name="change_password">Ubah Password</string>
     <string name="logout">Keluar</string>
     <string name="good">Bagus</string>
+
     <string name="speech_detection">Speech, Detection</string>
     <string name="image_action">Image, Action</string>
     <string name="selamat_datang">Selamat Datang</string>
