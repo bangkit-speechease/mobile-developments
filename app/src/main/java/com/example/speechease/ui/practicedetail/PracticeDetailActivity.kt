@@ -1,13 +1,11 @@
 package com.example.speechease.ui.practicedetail
 
 import android.Manifest
-import android.content.Context
 import android.content.pm.PackageManager
 import android.media.AudioFormat
 import android.media.AudioRecord
 import android.media.MediaRecorder
 import android.os.Bundle
-import android.os.Environment
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -21,10 +19,10 @@ import com.example.speechease.databinding.ActivityPracticeDetailBinding
 import com.example.speechease.ui.ViewModelFactory
 import kotlinx.coroutines.launch
 import okhttp3.internal.and
-import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import kotlin.concurrent.thread
+
 
 class PracticeDetailActivity : AppCompatActivity() {
 
@@ -70,6 +68,22 @@ class PracticeDetailActivity : AppCompatActivity() {
         }
     }
 
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == REQUEST_MIC_PERMISSION) {
+            if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                Toast.makeText(this, "Izin mikrofon diberikan.", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "Izin mikrofon ditolak.", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+
     private fun startRecording() {
         try {
             // Ubah ekstensi file ke .wav
@@ -86,15 +100,16 @@ class PracticeDetailActivity : AppCompatActivity() {
                     Manifest.permission.RECORD_AUDIO
                 ) != PackageManager.PERMISSION_GRANTED
             ) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
+                Toast.makeText(this, "Izin mikrofon belum diberikan.", Toast.LENGTH_SHORT).show()
+
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(Manifest.permission.RECORD_AUDIO),
+                    REQUEST_MIC_PERMISSION
+                )
                 return
             }
+
             audioRecord = AudioRecord(
                 MediaRecorder.AudioSource.MIC,
                 RECORDER_SAMPLE_RATE,
@@ -111,7 +126,7 @@ class PracticeDetailActivity : AppCompatActivity() {
 
             // Mulai thread untuk menulis data audio ke file WAV
             thread(true) {
-                writeAudioDataToFile(audioFile, bufferSize)
+                writeAudioDataToFile(audioFile)
             }
 
         } catch (e: Exception) {
@@ -143,7 +158,7 @@ class PracticeDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun writeAudioDataToFile(path: String, bufferSize: Int) {
+    private fun writeAudioDataToFile(path: String) {
         val sData = ShortArray(BufferElements2Rec)
         var os: FileOutputStream? = null
         try {
@@ -274,6 +289,7 @@ class PracticeDetailActivity : AppCompatActivity() {
     }
 
     companion object {
+        private const val REQUEST_MIC_PERMISSION = 1
         private const val RECORDER_SAMPLE_RATE = 16000 // Sampling rate (Hz)
         private const val RECORDER_CHANNELS = AudioFormat.CHANNEL_IN_MONO // Audio channel configuration
         private const val RECORDER_AUDIO_ENCODING = AudioFormat.ENCODING_PCM_16BIT // Audio encoding format
