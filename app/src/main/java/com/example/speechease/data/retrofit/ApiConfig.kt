@@ -1,5 +1,6 @@
 package com.example.speechease.data.retrofit
 
+import android.content.Context
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -11,7 +12,7 @@ object ApiConfig {
 
     private const val BASE_URL = "https://speechease-iw10810.et.r.appspot.com/"
 
-    fun getApiService(): ApiService {
+    fun getApiService(context: Context): ApiService {
         val loggingInterceptor = HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
         }

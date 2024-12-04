@@ -1,14 +1,12 @@
-package com.example.speechease.ui
+package com.example.speechease
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.speechease.MainViewModel
 import com.example.speechease.data.repository.UserRepository
-import com.example.speechease.data.retrofit.ApiService
 import com.example.speechease.di.Injection
 import com.example.speechease.ui.login.LoginViewModel
-import com.example.speechease.ui.practicedetail.PracticeDetailViewModel
+
 
 class ViewModelFactory(private val repository: UserRepository) : ViewModelProvider.NewInstanceFactory() {
 

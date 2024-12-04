@@ -65,4 +65,10 @@ dependencies {
 
     implementation(libs.material)
     implementation (libs.androidx.lifecycle.runtime.ktx)
+
+    // datastore
+    implementation(libs.androidx.datastore.preferences)
+    /*implementation(libs.androidx.lifecycle.viewmodel.ktx.v261)
+    implementation(libs.androidx.lifecycle.livedata.ktx.v261)*/
+    implementation(libs.androidx.activity.ktx)
 }
