@@ -54,20 +54,9 @@ class PracticeDetailActivity : AppCompatActivity() {
         UserRepository.getInstance(this, apiService) // Diperbarui: Memberikan context dan apiService
     }
 
-    /*// Inisialisasi ViewModel dengan ViewModelFactory
-    private val viewModel: PracticeDetailViewModel by viewModels {
-        ViewModelFactory(apiService)
-    }*/
-
     // Inisialisasi ViewModel dengan ViewModelFactory
     private lateinit var viewModel: PracticeDetailViewModel
-    /*private val viewModel: PracticeDetailViewModel by viewModels {
-        ViewModelFactory(userRepository) // Memberikan userRepository
-    }*/
-    //private val viewModel: PracticeDetailViewModel by viewModels()
-    /*private val viewModel: PracticeDetailViewModel by viewModels {
-        ViewModelFactory(userRepository) // Diperbarui: Memberikan userRepository
-    }*/
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
