@@ -55,6 +55,10 @@ class UserRepository(
         return userPreference.getSession()
     }
 
+    fun provideApiService(): ApiService {
+        return apiService
+    }
+
     suspend fun logout() {
         userPreference.logout()
     }

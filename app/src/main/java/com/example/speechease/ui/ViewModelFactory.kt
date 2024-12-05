@@ -21,6 +21,10 @@ class ViewModelFactory(private val repository: UserRepository) : ViewModelProvid
             modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
                 LoginViewModel(repository) as T
             }
+            // Menambahkan PracticeDetailViewModel
+            modelClass.isAssignableFrom(PracticeDetailViewModel::class.java) -> {
+                PracticeDetailViewModel(repository.provideApiService()) as T
+            }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
     }

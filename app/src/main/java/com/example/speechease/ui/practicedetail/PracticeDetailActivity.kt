@@ -13,11 +13,16 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.speechease.R
+import com.example.speechease.data.pref.UserPreference
+import com.example.speechease.data.pref.dataStore
+import com.example.speechease.data.repository.UserRepository
 import com.example.speechease.data.retrofit.ApiConfig
 import com.example.speechease.data.retrofit.ApiService
 import com.example.speechease.databinding.ActivityPracticeDetailBinding
+import com.example.speechease.di.Injection
 import com.example.speechease.ui.ViewModelFactory
 import kotlinx.coroutines.launch
 import okhttp3.internal.and
@@ -34,20 +39,45 @@ class PracticeDetailActivity : AppCompatActivity() {
 
     private var isRecording = false // Flag untuk status perekaman
 
+    // Inisialisasi UserPreference
+    private val userPreference: UserPreference by lazy {
+        UserPreference.getInstance(dataStore)
+    }
+
     // Inisialisasi ApiService
     private val apiService: ApiService by lazy {
         ApiConfig.getApiService()
     }
 
-    // Inisialisasi ViewModel dengan ViewModelFactory
+    // Inisialisasi UserRepository
+    private val userRepository: UserRepository by lazy {
+        UserRepository.getInstance(this, apiService) // Diperbarui: Memberikan context dan apiService
+    }
+
+    /*// Inisialisasi ViewModel dengan ViewModelFactory
     private val viewModel: PracticeDetailViewModel by viewModels {
         ViewModelFactory(apiService)
-    }
+    }*/
+
+    // Inisialisasi ViewModel dengan ViewModelFactory
+    private lateinit var viewModel: PracticeDetailViewModel
+    /*private val viewModel: PracticeDetailViewModel by viewModels {
+        ViewModelFactory(userRepository) // Memberikan userRepository
+    }*/
+    //private val viewModel: PracticeDetailViewModel by viewModels()
+    /*private val viewModel: PracticeDetailViewModel by viewModels {
+        ViewModelFactory(userRepository) // Diperbarui: Memberikan userRepository
+    }*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPracticeDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Membuat Instance
+        val userRepository = Injection.provideRepository(this)
+        val viewModelFactory = ViewModelFactory(userRepository)
+        viewModel = ViewModelProvider(this, viewModelFactory)[PracticeDetailViewModel::class.java]
 
         binding.btnMic.setOnClickListener {
             if (isRecording) {

@@ -29,7 +29,9 @@ class PracticeDetailViewModel(private val apiService: ApiService) : ViewModel() 
         val multipartBody = MultipartBody.Part.createFormData("file", file.name, requestFile)
 
         try {
+            Log.d("PracticeDetailViewModel", "Mengirim request ke API...")
             val response = apiService.submitAudioFeedback(multipartBody)
+            Log.d("PracticeDetailViewModel", "Respons dari API: $response")
             if (response.isSuccessful && response.body() != null) {
                 val audioResponse = response.body()!!
                 // Correctly access predicted_label from feedback
@@ -44,6 +46,7 @@ class PracticeDetailViewModel(private val apiService: ApiService) : ViewModel() 
             }
 
         } catch (e: Exception) {
+            Log.e("PracticeDetailViewModel", "Error saat mengirim request ke API: ${e.message}", e)
             _uploadStatus.value = "Terjadi kesalahan: ${e.message}"
         }
     }
