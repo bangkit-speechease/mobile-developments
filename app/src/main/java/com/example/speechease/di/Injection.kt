@@ -10,6 +10,7 @@ import com.example.speechease.data.retrofit.ApiConfig
 object Injection {
     fun provideRepository(context: Context): UserRepository {
         val pref = UserPreference.getInstance(context.dataStore)
-        return UserRepository.getInstance(pref)
+        val apiService = ApiConfig.getApiService()
+        return UserRepository.getInstance(context, apiService)
     }
 }

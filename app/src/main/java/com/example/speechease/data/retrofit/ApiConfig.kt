@@ -7,12 +7,10 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-
 object ApiConfig {
-
     private const val BASE_URL = "https://speechease-iw10810.et.r.appspot.com/"
 
-    fun getApiService(context: Context): ApiService {
+    fun getApiService(): ApiService {
         val loggingInterceptor = HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
         }

@@ -72,14 +72,14 @@ class UserRepository(
 
     companion object {
         @Volatile
-        private var INSTANCE: UserPreference? = null
+        private var instance: UserRepository? = null
 
-        fun getInstance(dataStore: DataStore<Preferences>): UserPreference {
-            return INSTANCE ?: synchronized(this) {
-                val instance = UserPreference(dataStore)
-                INSTANCE = instance
-                instance
-            }
-        }
+        fun getInstance(
+            context: Context,
+            apiService: ApiService
+        ): UserRepository =
+            instance ?: synchronized(this) {
+                instance ?: UserRepository(apiService, UserPreference.getInstance(context.dataStore))
+            }.also { instance = it }
     }
 }
