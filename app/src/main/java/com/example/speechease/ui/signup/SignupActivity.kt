@@ -29,6 +29,7 @@ import retrofit2.HttpException
 class SignupActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignupBinding
     private lateinit var userRepository: UserRepository
+    private lateinit var viewModel: SignupViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +37,7 @@ class SignupActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         userRepository = Injection.provideRepository(this)
+        viewModel = SignupViewModel(userRepository)
 
         setupView()
         setupAction()
@@ -65,7 +67,7 @@ class SignupActivity : AppCompatActivity() {
                 binding.progressBar.visibility = View.VISIBLE
 
                 try {
-                    val response = userRepository.registerUser(name, email, password)
+                    val response = viewModel.register(name, email, password)
                     if (!response.error) {
                         Toast.makeText(
                             this@SignupActivity,
@@ -75,7 +77,7 @@ class SignupActivity : AppCompatActivity() {
 
                         AlertDialog.Builder(this@SignupActivity).apply {
                             setTitle("Yeah!")
-                            setMessage("Akun dengan $email sudah jadi nih. Yuk, login dan belajar coding.")
+                            setMessage("Akun dengan $email sudah jadi nih. Yuk, login dan belajar bersama!")
                             setPositiveButton("Lanjut") { _, _ ->
                                 startActivity(
                                     Intent(
