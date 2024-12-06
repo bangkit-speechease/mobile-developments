@@ -32,9 +32,10 @@ class UserRepository(
         return apiService.registerUser(requestBody)
     }
 
-    suspend fun loginUser(token: String): LoginResponse {
+    suspend fun loginUser(email: String, password: String): LoginResponse {
         val requestBody = mapOf(
-            "token" to token
+            "email" to email,
+            "password" to password
         )
         return apiService.loginUser(requestBody)
     }
