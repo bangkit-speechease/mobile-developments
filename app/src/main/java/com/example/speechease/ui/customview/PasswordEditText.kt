@@ -40,7 +40,7 @@ class PasswordEditText : AppCompatEditText {
             }
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                if (s.toString().length < 8) {
+                if (s.toString().length < 6) {
                     error = context.getString(R.string.password_error)
                 } else {
                     error = null
