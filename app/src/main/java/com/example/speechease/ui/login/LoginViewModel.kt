@@ -20,8 +20,10 @@ class LoginViewModel @Inject constructor(private val userRepository: UserReposit
                 val response = userRepository.loginUser(email, password)
                 if (!response.error) {
                     val user = UserModel(
+                        userId = response.loginResult.userId,
+                        name = response.loginResult.name,
                         email = email,
-                        token = response.token,
+                        token = response.loginResult.token,
                         isLogin = true
                     )
                     userRepository.saveSession(user)
