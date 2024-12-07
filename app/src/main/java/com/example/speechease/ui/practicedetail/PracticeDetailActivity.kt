@@ -69,9 +69,6 @@ class PracticeDetailActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // Membuat Instance
-        val userRepository = Injection.provideRepository(this)
-        //val viewModelFactory = ViewModelFactory(userRepository)
-        //viewModel = ViewModelProvider(this, viewModelFactory)[PracticeDetailViewModel::class.java]*/
         //viewModel = ViewModelProvider(this, ViewModelFactory.getInstance(this))[PracticeDetailViewModel::class.java]
 
         binding.btnMic.setOnClickListener {

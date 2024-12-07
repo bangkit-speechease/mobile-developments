@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.speechease.data.pref.UserPreference
+import com.example.speechease.data.repository.ContentRepository
 import com.example.speechease.data.retrofit.ApiService
 import kotlinx.coroutines.flow.first
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -14,7 +15,8 @@ import java.io.File
 
 class PracticeDetailViewModel(
     private val apiService: ApiService,
-    private val userPreference: UserPreference
+    private val userPreference: UserPreference,
+    private val contentRepository: ContentRepository
 ) : ViewModel() {
 
     private val _predictedLabel = MutableLiveData<String>()
@@ -38,7 +40,8 @@ class PracticeDetailViewModel(
 
             Log.d("PracticeDetailViewModel", "Mengirim request ke API...")
             //val response = apiService.submitAudioFeedback(multipartBody)
-            val response = apiService.submitAudioFeedback(multipartBody, "Bearer $token")
+            //val response = apiService.submitAudioFeedback(multipartBody, "Bearer $token")
+            val response = contentRepository.submitAudioFeedback(multipartBody)
             Log.d("PracticeDetailViewModel", "Respons dari API: $response")
             if (response.isSuccessful && response.body() != null) {
                 val audioResponse = response.body()!!
