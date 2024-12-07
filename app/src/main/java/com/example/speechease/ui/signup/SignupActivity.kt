@@ -10,15 +10,11 @@ import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
-import androidx.activity.result.launch
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.example.speechease.R
 import com.example.speechease.data.repository.UserRepository
 import com.example.speechease.data.response.ErrorResponse
-import com.example.speechease.databinding.ActivityLoginBinding
 import com.example.speechease.databinding.ActivitySignupBinding
 import com.example.speechease.di.Injection
 import com.example.speechease.ui.login.LoginActivity
@@ -77,7 +73,7 @@ class SignupActivity : AppCompatActivity() {
 
                         AlertDialog.Builder(this@SignupActivity).apply {
                             setTitle("Yeah!")
-                            setMessage("Akun dengan $email sudah jadi nih. Yuk, login dan belajar bersama!")
+                            setMessage("Akun dengan $email sudah jadi nih. Jangan lupa untuk Verifikasi Email Anda!")
                             setPositiveButton("Lanjut") { _, _ ->
                                 startActivity(
                                     Intent(

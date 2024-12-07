@@ -1,10 +1,6 @@
 package com.example.speechease.data.repository
 
 import android.content.Context
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.booleanPreferencesKey
-import androidx.datastore.preferences.core.stringPreferencesKey
 import com.example.speechease.data.pref.UserModel
 import com.example.speechease.data.pref.UserPreference
 import com.example.speechease.data.pref.dataStore

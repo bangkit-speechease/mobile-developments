@@ -72,4 +72,7 @@ dependencies {
 
     // inject
     implementation(libs.javax.inject)
+
+    // worker
+    implementation(libs.androidx.work.runtime.ktx)
 }

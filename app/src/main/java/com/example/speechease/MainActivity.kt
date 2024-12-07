@@ -1,12 +1,18 @@
 package com.example.speechease
 
 import android.os.Bundle
+import android.util.Log
+import androidx.activity.result.launch
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.example.speechease.databinding.ActivityMainBinding
+import com.example.speechease.di.Injection
 import com.example.speechease.ui.home.HomeFragment
 import com.example.speechease.ui.profile.ProfileFragment
 import com.example.speechease.ui.progress.ProgressFragment
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
@@ -16,8 +22,14 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        if (savedInstanceState == null) {
-            loadFragment(HomeFragment())
+        val userRepository = Injection.provideRepository(this)
+        lifecycleScope.launch {
+            val user = userRepository.getSession().first()
+            Log.d("MainActivity", "User session: $user")
+
+            if (savedInstanceState == null) {
+                loadFragment(HomeFragment())
+            }
         }
 
         binding.bottomNavigationView.setOnItemSelectedListener { item ->

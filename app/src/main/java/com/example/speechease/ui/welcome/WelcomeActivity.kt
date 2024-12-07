@@ -8,26 +8,41 @@ import android.os.Bundle
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.example.speechease.R
+import androidx.lifecycle.lifecycleScope
+import com.example.speechease.MainActivity
+import com.example.speechease.data.pref.UserPreference
+import com.example.speechease.data.pref.dataStore
 import com.example.speechease.databinding.ActivityWelcomeBinding
 import com.example.speechease.ui.login.LoginActivity
 import com.example.speechease.ui.signup.SignupActivity
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 
 class WelcomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityWelcomeBinding
+    private lateinit var userPreference: UserPreference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityWelcomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setupView()
-        setupAction()
-        playAnimation()
+        userPreference = UserPreference.getInstance(dataStore)
+
+        lifecycleScope.launch {
+            val session = userPreference.getSession().first()
+            if (session.isLogin && session.token != null) {
+                // Sesi valid, arahkan ke MainActivity
+                startActivity(Intent(this@WelcomeActivity, MainActivity::class.java))
+                finish()
+            } else {
+                // Sesi tidak valid, tampilkan WelcomeActivity
+                setupView()
+                setupAction()
+                playAnimation()
+            }
+        }
     }
 
     private fun setupView() {

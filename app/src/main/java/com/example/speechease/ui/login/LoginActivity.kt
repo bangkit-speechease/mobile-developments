@@ -11,9 +11,12 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
 import com.example.speechease.MainActivity
 import com.example.speechease.databinding.ActivityLoginBinding
 import com.example.speechease.di.Injection
+import com.example.speechease.ui.worker.SaveSessionWorker
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -41,6 +44,11 @@ class LoginActivity : AppCompatActivity() {
                 }
                 is Result.Success -> {
                     showLoading(false)
+
+                    val saveSessionWorkerRequest = OneTimeWorkRequestBuilder<SaveSessionWorker>()
+                        .build()
+                    WorkManager.getInstance(this).enqueue(saveSessionWorkerRequest)
+
                     AlertDialog.Builder(this).apply {
                         setTitle("Yeah!")
                         setMessage("Anda berhasil login. Yuk mulai belajar!") // Sesuaikan pesan

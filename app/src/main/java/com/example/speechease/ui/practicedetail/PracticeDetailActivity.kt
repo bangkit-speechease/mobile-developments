@@ -46,7 +46,7 @@ class PracticeDetailActivity : AppCompatActivity() {
 
     // Inisialisasi ApiService
     private val apiService: ApiService by lazy {
-        ApiConfig.getApiService()
+        ApiConfig.getApiService(applicationContext)
     }
 
     // Inisialisasi UserRepository
