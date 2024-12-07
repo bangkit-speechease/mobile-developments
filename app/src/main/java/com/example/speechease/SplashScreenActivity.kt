@@ -1,5 +1,6 @@
 package com.example.speechease
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -17,6 +18,7 @@ import com.example.speechease.ui.welcome.WelcomeActivity
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
+@SuppressLint("CustomSplashScreen")
 class SplashScreenActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySplashScreenBinding
     private lateinit var userPreference: UserPreference
@@ -47,9 +49,9 @@ class SplashScreenActivity : AppCompatActivity() {
 
         lifecycleScope.launch {
             val userRepository = Injection.provideRepository(this@SplashScreenActivity)
-            val user: UserModel? = userRepository.getUser().first()
+            val user: UserModel = userRepository.getUser().first()
 
-            if (user?.isLogin == true && user.token!!.isNotEmpty()) {
+            if (user.isLogin && user.token.isNotEmpty()) {
                 startActivity(Intent(this@SplashScreenActivity, MainActivity::class.java))
                 finish()
             } else {

@@ -1,5 +1,6 @@
 package com.example.speechease.data.pref
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.util.Log
@@ -37,7 +38,7 @@ class UserPreference private constructor(private val context: Context) {
                 sharedPreferences.getString(TOKEN_KEY, "") ?: "",
                 sharedPreferences.getBoolean(IS_LOGIN_KEY, false)
             )
-            Log.d("UserPreference", "Token diambil dari SharedPreferences: ${userModel.token}")
+            Log.d("User Preference", "Token diambil dari SharedPreferences: ${userModel.token}")
             emit(userModel)
         }
     }
@@ -49,6 +50,7 @@ class UserPreference private constructor(private val context: Context) {
     }
 
     companion object {
+        @SuppressLint("StaticFieldLeak")
         @Volatile
         private var INSTANCE: UserPreference? = null
 

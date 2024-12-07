@@ -1,5 +1,6 @@
 package com.example.speechease.data.repository
 
+import android.annotation.SuppressLint
 import android.content.Context
 import com.example.speechease.data.pref.UserModel
 import com.example.speechease.data.pref.UserPreference
@@ -80,6 +81,7 @@ class UserRepository @Inject constructor(
     }
 
     companion object {
+        @SuppressLint("StaticFieldLeak")
         @Volatile
         private var instance: UserRepository? = null
 
