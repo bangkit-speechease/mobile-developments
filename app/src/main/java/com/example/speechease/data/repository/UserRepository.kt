@@ -3,7 +3,6 @@ package com.example.speechease.data.repository
 import android.content.Context
 import com.example.speechease.data.pref.UserModel
 import com.example.speechease.data.pref.UserPreference
-import com.example.speechease.data.pref.dataStore
 import com.example.speechease.data.response.DeleteUserResponse
 import com.example.speechease.data.response.LoginResponse
 import com.example.speechease.data.response.LogoutResponse
@@ -13,8 +12,9 @@ import com.example.speechease.data.response.UserDetailResponse
 import com.example.speechease.data.retrofit.ApiService
 import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
+import javax.inject.Inject
 
-class UserRepository(
+class UserRepository @Inject constructor(
     private val apiService: ApiService,
     private val userPreference: UserPreference
 ) {
@@ -80,7 +80,7 @@ class UserRepository(
             apiService: ApiService
         ): UserRepository =
             instance ?: synchronized(this) {
-                instance ?: UserRepository(apiService, UserPreference.getInstance(context.dataStore))
+                instance ?: UserRepository(apiService, UserPreference.getInstance(context))
             }.also { instance = it }
     }
 }

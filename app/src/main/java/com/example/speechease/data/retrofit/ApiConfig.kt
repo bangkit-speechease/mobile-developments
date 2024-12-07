@@ -3,7 +3,6 @@ package com.example.speechease.data.retrofit
 import android.content.Context
 import com.example.speechease.data.pref.AuthInterceptor
 import com.example.speechease.data.pref.UserPreference
-import com.example.speechease.data.pref.dataStore
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

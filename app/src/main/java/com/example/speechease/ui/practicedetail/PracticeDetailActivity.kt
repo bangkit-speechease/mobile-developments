@@ -17,7 +17,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.speechease.R
 import com.example.speechease.data.pref.UserPreference
-import com.example.speechease.data.pref.dataStore
 import com.example.speechease.data.repository.UserRepository
 import com.example.speechease.data.retrofit.ApiConfig
 import com.example.speechease.data.retrofit.ApiService
@@ -41,14 +40,12 @@ class PracticeDetailActivity : AppCompatActivity() {
 
     // Inisialisasi UserPreference
     private val userPreference: UserPreference by lazy {
-        UserPreference.getInstance(dataStore)
+        UserPreference.getInstance(this)
     }
 
     // Inisialisasi ApiService
     private val apiService: ApiService by lazy {
-        /*ApiConfig.getApiService(applicationContext)*/
-        val userPreference = UserPreference.getInstance(applicationContext.dataStore)
-        ApiConfig.getApiService(applicationContext, userPreference)
+        ApiConfig.getApiService(this, userPreference)
     }
 
     // Inisialisasi UserRepository

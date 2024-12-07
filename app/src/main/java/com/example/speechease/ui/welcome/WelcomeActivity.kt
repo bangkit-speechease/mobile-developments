@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.speechease.MainActivity
 import com.example.speechease.data.pref.UserPreference
-import com.example.speechease.data.pref.dataStore
 import com.example.speechease.databinding.ActivityWelcomeBinding
 import com.example.speechease.ui.login.LoginActivity
 import com.example.speechease.ui.signup.SignupActivity

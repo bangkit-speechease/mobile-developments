@@ -12,8 +12,8 @@ import javax.inject.Inject
 
 
 class LoginViewModel @Inject constructor(private val userRepository: UserRepository) : ViewModel() {
-    private val _loginResult = MutableLiveData<Result<LoginResponse>>()
-    val loginResult: LiveData<Result<LoginResponse>> = _loginResult
+    private val _loginResult = MutableLiveData<Result<UserModel>>()
+    val loginResult: LiveData<Result<UserModel>> = _loginResult
 
     fun login(email: String, password: String) {
         viewModelScope.launch {
@@ -27,7 +27,7 @@ class LoginViewModel @Inject constructor(private val userRepository: UserReposit
                         isLogin = true
                     )
                     userRepository.saveSession(user)
-                    _loginResult.value = Result.Success(response)
+                    _loginResult.value = Result.Success(user)
                 } else {
                     _loginResult.value = Result.Error(response.message)
                 }

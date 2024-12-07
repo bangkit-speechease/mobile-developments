@@ -45,9 +45,9 @@ class LoginActivity : AppCompatActivity() {
                 is Result.Success -> {
                     showLoading(false)
 
-                    val saveSessionWorkerRequest = OneTimeWorkRequestBuilder<SaveSessionWorker>()
+                    /*val saveSessionWorkerRequest = OneTimeWorkRequestBuilder<SaveSessionWorker>()
                         .build()
-                    WorkManager.getInstance(this).enqueue(saveSessionWorkerRequest)
+                    WorkManager.getInstance(this).enqueue(saveSessionWorkerRequest)*/
 
                     AlertDialog.Builder(this).apply {
                         setTitle("Yeah!")

@@ -13,10 +13,13 @@ class SaveSessionWorker(appContext: Context, workerParams: WorkerParameters) : W
         Log.d("SaveSessionWorker", "doWork() started")
         val userRepository = Injection.provideRepository(applicationContext)
         val session = runBlocking { userRepository.getSession().first() }
+
+        val updatedSession = session.copy(token = session.token)
+
         runBlocking {
-            userRepository.saveSession(session)
+            userRepository.saveSession(updatedSession)
         }
-        Log.d("SaveSessionWorker", "Session data saved to DataStore: $session")
+        Log.d("SaveSessionWorker", "Session data saved to DataStore: $updatedSession")
         Log.d("SaveSessionWorker", "doWork() finished")
 
         return Result.success()
