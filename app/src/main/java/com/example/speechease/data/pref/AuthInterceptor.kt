@@ -8,10 +8,8 @@ import okhttp3.Response
 
 class AuthInterceptor(private val userPreference: UserPreference) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
-        val token = runBlocking { userPreference.getSession().first().token } // Ambil token dari UserPreference
+        val token = runBlocking { userPreference.getSession().first().token }
         val request = chain.request()
-        Log.d("AuthInterceptor", "Token: $token") // Tambahkan log untuk menampilkan token
-
         val requestHeaders = request.newBuilder()
             .addHeader("Authorization", "Bearer $token")
             .build()

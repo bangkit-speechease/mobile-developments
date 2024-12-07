@@ -45,10 +45,6 @@ class LoginActivity : AppCompatActivity() {
                 is Result.Success -> {
                     showLoading(false)
 
-                    /*val saveSessionWorkerRequest = OneTimeWorkRequestBuilder<SaveSessionWorker>()
-                        .build()
-                    WorkManager.getInstance(this).enqueue(saveSessionWorkerRequest)*/
-
                     AlertDialog.Builder(this).apply {
                         setTitle("Yeah!")
                         setMessage("Anda berhasil login. Yuk mulai belajar!") // Sesuaikan pesan

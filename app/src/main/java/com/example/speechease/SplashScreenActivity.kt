@@ -29,53 +29,32 @@ class SplashScreenActivity : AppCompatActivity() {
         binding = ActivitySplashScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        userPreference = UserPreference.getInstance(this) // Inisialisasi dengan context
-
         // Memuat animasi zoom-in
         val zoomInAnimation = AnimationUtils.loadAnimation(this, R.anim.zoom_in)
         binding.logoImageView.startAnimation(zoomInAnimation)
 
+        // Delay splash screen selama 3 detik (3000 ms)
+        Handler(Looper.getMainLooper()).postDelayed({
+            // Intent menuju WelcomeActivity
+            val intent = Intent(this, WelcomeActivity::class.java)
+            startActivity(intent)
+            finish() // Menghapus activity ini dari back stack
+        }, 3000) // 3000 ms = 3 detik
+    }
+
+    override fun onResume() {
+        super.onResume()
+
         lifecycleScope.launch {
-            val session = userPreference.getSession().first()
-            if (session.isLogin && session.token != null) {
-                // Sesi valid, arahkan ke MainActivity
+            val userRepository = Injection.provideRepository(this@SplashScreenActivity)
+            val user: UserModel? = userRepository.getUser().first()
+
+            if (user?.isLogin == true && user.token!!.isNotEmpty()) {
                 startActivity(Intent(this@SplashScreenActivity, MainActivity::class.java))
                 finish()
             } else {
-                // Sesi tidak valid, lanjutkan ke WelcomeActivity
-                Handler(Looper.getMainLooper()).postDelayed({
-                    val intent = Intent(this@SplashScreenActivity, WelcomeActivity::class.java)
-                    startActivity(intent)
-                    finish()
-                }, 3000)
+                Log.d("SplashScreenActivity", "Pengguna belum login atau token kosong.")
             }
-        }
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        lifecycleScope.launch {
-            val user = userRepository.getSession().first()
-            outState.putString("userId", user.userId)
-            outState.putString("name", user.name)
-            outState.putString("email", user.email)
-            outState.putString("token", user.token)
-            outState.putBoolean("isLogin", user.isLogin)
-            Log.d("MainActivity", "onSaveInstanceState: Saving session: $user")
-        }
-    }
-
-    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        super.onRestoreInstanceState(savedInstanceState)
-        val userId = savedInstanceState.getString("userId", "")
-        val name = savedInstanceState.getString("name", "")
-        val email = savedInstanceState.getString("email", "")
-        val token = savedInstanceState.getString("token", "")
-        val isLogin = savedInstanceState.getBoolean("isLogin", false)
-        val user = UserModel(userId, name, email, token, isLogin)
-        lifecycleScope.launch {
-            userRepository.saveSession(user)
-            Log.d("MainActivity", "onRestoreInstanceState: Restoring session: $user")
         }
     }
 }

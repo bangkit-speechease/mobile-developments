@@ -15,6 +15,10 @@ class LoginViewModel @Inject constructor(private val userRepository: UserReposit
     private val _loginResult = MutableLiveData<Result<UserModel>>()
     val loginResult: LiveData<Result<UserModel>> = _loginResult
 
+    // Tambahkan LiveData untuk token
+    private val _token = MutableLiveData<String?>()
+    val token: LiveData<String?> = _token
+
     fun login(email: String, password: String) {
         viewModelScope.launch {
             _loginResult.value = Result.Loading
@@ -28,6 +32,7 @@ class LoginViewModel @Inject constructor(private val userRepository: UserReposit
                     )
                     userRepository.saveSession(user)
                     _loginResult.value = Result.Success(user)
+                    _token.value = response.data?.token
                 } else {
                     _loginResult.value = Result.Error(response.message)
                 }

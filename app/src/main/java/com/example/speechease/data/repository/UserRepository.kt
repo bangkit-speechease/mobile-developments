@@ -15,9 +15,13 @@ import retrofit2.Response
 import javax.inject.Inject
 
 class UserRepository @Inject constructor(
-    private val apiService: ApiService,
-    private val userPreference: UserPreference
+    private val context: Context,
+    private val apiService: ApiService
 ) {
+
+    private val userPreference: UserPreference by lazy {
+        UserPreference.getInstance(context)
+    }
 
     suspend fun registerUser(name: String, email: String, password: String): RegisterResponse {
         val requestBody = mapOf(
@@ -52,6 +56,10 @@ class UserRepository @Inject constructor(
         return userPreference.getSession()
     }
 
+    fun getUser(): Flow<UserModel> {
+        return userPreference.getSession()
+    }
+
     fun provideApiService(): ApiService {
         return apiService
     }
@@ -80,7 +88,7 @@ class UserRepository @Inject constructor(
             apiService: ApiService
         ): UserRepository =
             instance ?: synchronized(this) {
-                instance ?: UserRepository(apiService, UserPreference.getInstance(context))
+                instance ?: UserRepository(context, apiService)
             }.also { instance = it }
     }
 }

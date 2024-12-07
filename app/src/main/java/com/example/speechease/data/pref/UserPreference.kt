@@ -31,11 +31,6 @@ class UserPreference private constructor(private val context: Context) {
     fun getSession(): Flow<UserModel> {
         return flow {
             val userModel = UserModel(
-                /*userId = sharedPreferences.getString(USER_ID_KEY, null),
-                name = sharedPreferences.getString(NAME_KEY, null),
-                email = sharedPreferences.getString(EMAIL_KEY, null),
-                token = sharedPreferences.getString(TOKEN_KEY, null),
-                isLogin = sharedPreferences.getBoolean(IS_LOGIN_KEY, false)*/
                 sharedPreferences.getString(USER_ID_KEY, "") ?: "",
                 sharedPreferences.getString(NAME_KEY, "") ?: "",
                 sharedPreferences.getString(EMAIL_KEY, "") ?: "",
