@@ -52,10 +52,11 @@ interface ApiService {
     @GET("content/{contentId}")
     suspend fun getContentDetails(@Path("contentId") contentId: String): Response<ContentDetailResponse>
 
-    //@Headers("Content-Type: multipart/form-data")
+    @Headers("Content-Type: multipart/form-data")
     @Multipart
     @POST("feedback")
     suspend fun submitAudioFeedback(
-        @Part file: MultipartBody.Part
+        @Part file: MultipartBody.Part,
+        @Header("Authorization") authorization: String
     ): Response<AudioFeedbackResponse>
 }

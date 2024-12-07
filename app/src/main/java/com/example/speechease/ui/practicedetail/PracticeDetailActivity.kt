@@ -46,7 +46,9 @@ class PracticeDetailActivity : AppCompatActivity() {
 
     // Inisialisasi ApiService
     private val apiService: ApiService by lazy {
-        ApiConfig.getApiService(applicationContext)
+        /*ApiConfig.getApiService(applicationContext)*/
+        val userPreference = UserPreference.getInstance(applicationContext.dataStore)
+        ApiConfig.getApiService(applicationContext, userPreference)
     }
 
     // Inisialisasi UserRepository
@@ -55,7 +57,10 @@ class PracticeDetailActivity : AppCompatActivity() {
     }
 
     // Inisialisasi ViewModel dengan ViewModelFactory
-    private lateinit var viewModel: PracticeDetailViewModel
+    //private lateinit var viewModel: PracticeDetailViewModel
+    private val viewModel: PracticeDetailViewModel by viewModels {
+        ViewModelFactory.getInstance(this)
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,8 +70,9 @@ class PracticeDetailActivity : AppCompatActivity() {
 
         // Membuat Instance
         val userRepository = Injection.provideRepository(this)
-        val viewModelFactory = ViewModelFactory(userRepository)
-        viewModel = ViewModelProvider(this, viewModelFactory)[PracticeDetailViewModel::class.java]
+        //val viewModelFactory = ViewModelFactory(userRepository)
+        //viewModel = ViewModelProvider(this, viewModelFactory)[PracticeDetailViewModel::class.java]*/
+        //viewModel = ViewModelProvider(this, ViewModelFactory.getInstance(this))[PracticeDetailViewModel::class.java]
 
         binding.btnMic.setOnClickListener {
             if (isRecording) {

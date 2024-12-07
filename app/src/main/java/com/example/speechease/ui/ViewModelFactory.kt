@@ -11,7 +11,10 @@ import com.example.speechease.ui.login.LoginViewModel
 import com.example.speechease.ui.practicedetail.PracticeDetailViewModel
 import com.example.speechease.ui.profile.ProfileViewModel
 
-class ViewModelFactory(private val repository: UserRepository) : ViewModelProvider.NewInstanceFactory() {
+class ViewModelFactory(
+    private val repository: UserRepository,
+    private val context: Context
+) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -27,7 +30,8 @@ class ViewModelFactory(private val repository: UserRepository) : ViewModelProvid
             }
             // Menambahkan PracticeDetailViewModel
             modelClass.isAssignableFrom(PracticeDetailViewModel::class.java) -> {
-                PracticeDetailViewModel(repository.provideApiService()) as T
+                //PracticeDetailViewModel(repository.provideApiService()) as T
+                Injection.providePracticeDetailViewModel(context) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
@@ -40,7 +44,7 @@ class ViewModelFactory(private val repository: UserRepository) : ViewModelProvid
         fun getInstance(context: Context): ViewModelFactory {
             if (INSTANCE == null) {
                 synchronized(ViewModelFactory::class.java) {
-                    INSTANCE = ViewModelFactory(Injection.provideRepository(context))
+                    INSTANCE = ViewModelFactory(Injection.provideRepository(context), context)
                 }
             }
             return INSTANCE as ViewModelFactory

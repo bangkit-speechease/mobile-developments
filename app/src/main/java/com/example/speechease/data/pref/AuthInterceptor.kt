@@ -8,15 +8,20 @@ import okhttp3.Response
 
 class AuthInterceptor(private val userPreference: UserPreference) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
-        val token = runBlocking { userPreference.getSession().first().token }
-        val request = chain.request()
-        val requestHeaders = request.newBuilder()
-            .addHeader("Authorization", "Bearer $token")
+        val originalRequest = chain.request()
+        val token = runBlocking { userPreference.getSession().first().token } ?: "" // Ambil token atau set "" jika null
+
+        val request = originalRequest.newBuilder()
+            .apply {
+                if (token.isNotEmpty()) {
+                    header("Authorization", "Bearer $token")
+                }
+            }
             .build()
 
         Log.d("AuthInterceptor", "Intercepting request: ${request.url}")
         Log.d("AuthInterceptor", "Adding Authorization header: Bearer $token")
 
-        return chain.proceed(requestHeaders)
+        return chain.proceed(request)
     }
 }

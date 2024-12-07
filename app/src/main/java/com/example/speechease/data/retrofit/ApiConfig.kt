@@ -13,19 +13,21 @@ import java.util.concurrent.TimeUnit
 object ApiConfig {
     private const val BASE_URL = "https://speechease-iw10810.et.r.appspot.com/"
 
-    fun getApiService(context: Context): ApiService {
+    fun getApiService(context: Context, userPreference: UserPreference): ApiService {
         val loggingInterceptor = HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
         }
 
-        val authInterceptor = AuthInterceptor(UserPreference.getInstance(context.dataStore))
+        val authInterceptor = AuthInterceptor(userPreference)
 
         val client = OkHttpClient.Builder()
-            .addInterceptor(loggingInterceptor)
-            .addInterceptor(authInterceptor)
-            .connectTimeout(300, TimeUnit.SECONDS)
-            .readTimeout(300, TimeUnit.SECONDS)
-            .writeTimeout(300, TimeUnit.SECONDS)
+            .apply {
+                addInterceptor(loggingInterceptor)
+                addInterceptor(authInterceptor)
+                connectTimeout(300, TimeUnit.SECONDS)
+                readTimeout(300, TimeUnit.SECONDS)
+                writeTimeout(300, TimeUnit.SECONDS)
+            }
             .build()
 
         val retrofit = Retrofit.Builder()
