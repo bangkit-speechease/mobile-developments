@@ -9,6 +9,7 @@ import com.example.speechease.data.retrofit.ApiService
 import com.example.speechease.di.Injection
 import com.example.speechease.ui.login.LoginViewModel
 import com.example.speechease.ui.practicedetail.PracticeDetailViewModel
+import com.example.speechease.ui.profile.ProfileViewModel
 
 class ViewModelFactory(private val repository: UserRepository) : ViewModelProvider.NewInstanceFactory() {
 
@@ -20,6 +21,9 @@ class ViewModelFactory(private val repository: UserRepository) : ViewModelProvid
             }
             modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
                 LoginViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(ProfileViewModel::class.java) -> {
+                ProfileViewModel(repository) as T
             }
             // Menambahkan PracticeDetailViewModel
             modelClass.isAssignableFrom(PracticeDetailViewModel::class.java) -> {
