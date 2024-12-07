@@ -21,34 +21,15 @@ import kotlinx.coroutines.launch
 
 class WelcomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityWelcomeBinding
-    private lateinit var userPreference: UserPreference
-    private var isSessionChecked = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityWelcomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        userPreference = UserPreference.getInstance(dataStore)
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        if (!isSessionChecked) {
-            lifecycleScope.launch {
-                val session = userPreference.getSession().first()
-                if (session.isLogin && session.token != null) {
-                    startActivity(Intent(this@WelcomeActivity, MainActivity::class.java))
-                    finish()
-                } else {
-                    setupView()
-                    setupAction()
-                    playAnimation()
-                }
-            }
-            isSessionChecked = true
-        }
+        setupView()
+        setupAction()
+        playAnimation()
     }
 
     private fun setupView() {
