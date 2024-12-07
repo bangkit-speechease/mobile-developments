@@ -5,14 +5,17 @@ import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.speechease.MainActivity
+import com.example.speechease.data.pref.UserModel
 import com.example.speechease.data.pref.UserPreference
 import com.example.speechease.databinding.ActivityWelcomeBinding
+import com.example.speechease.di.Injection
 import com.example.speechease.ui.login.LoginActivity
 import com.example.speechease.ui.signup.SignupActivity
 import kotlinx.coroutines.flow.first
@@ -29,6 +32,22 @@ class WelcomeActivity : AppCompatActivity() {
         setupView()
         setupAction()
         playAnimation()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        lifecycleScope.launch {
+            val userRepository = Injection.provideRepository(this@WelcomeActivity)
+            val user: UserModel? = userRepository.getUser().first()
+
+            if (user?.isLogin == true && user.token.isNotEmpty()) {
+                startActivity(Intent(this@WelcomeActivity, MainActivity::class.java))
+                finish()
+            } else {
+                Log.d("WelcomeActivity", "Pengguna belum login atau token kosong.")
+            }
+        }
     }
 
     private fun setupView() {

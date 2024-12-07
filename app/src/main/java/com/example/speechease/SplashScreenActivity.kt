@@ -36,15 +36,34 @@ class SplashScreenActivity : AppCompatActivity() {
         binding.logoImageView.startAnimation(zoomInAnimation)
 
         // Delay splash screen selama 3 detik (3000 ms)
-        Handler(Looper.getMainLooper()).postDelayed({
+        /*Handler(Looper.getMainLooper()).postDelayed({
             // Intent menuju WelcomeActivity
             val intent = Intent(this, WelcomeActivity::class.java)
             startActivity(intent)
             finish() // Menghapus activity ini dari back stack
-        }, 3000) // 3000 ms = 3 detik
+        }, 3000) // 3000 ms = 3 detik*/
+
+        lifecycleScope.launch {
+            val userRepository = Injection.provideRepository(this@SplashScreenActivity)
+            val user: UserModel = userRepository.getUser().first()
+
+            if (user.isLogin && user.token.isNotEmpty()) {
+                // Langsung menuju MainActivity jika sudah login
+                startActivity(Intent(this@SplashScreenActivity, MainActivity::class.java)
+                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP))
+                finish()
+            } else {
+                // Lanjutkan ke WelcomeActivity setelah delay jika belum login
+                Handler(Looper.getMainLooper()).postDelayed({
+                    val intent = Intent(this@SplashScreenActivity, WelcomeActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }, 3000)
+            }
+        }
     }
 
-    override fun onResume() {
+    /*override fun onResume() {
         super.onResume()
 
         lifecycleScope.launch {
@@ -58,5 +77,5 @@ class SplashScreenActivity : AppCompatActivity() {
                 Log.d("SplashScreenActivity", "Pengguna belum login atau token kosong.")
             }
         }
-    }
+    }*/
 }
