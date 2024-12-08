@@ -16,6 +16,7 @@ import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Headers
+import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Part
@@ -51,7 +52,8 @@ interface ApiService {
     @GET("content/{contentId}")
     suspend fun getContentDetails(@Path("contentId") contentId: String): Response<ContentDetailResponse>
 
-    @Headers("Content-Type: multipart/form-data")
+    //@Headers("Content-Type: multipart/form-data")
+    @Multipart
     @POST("feedback")
     suspend fun submitAudioFeedback(
         @Part file: MultipartBody.Part

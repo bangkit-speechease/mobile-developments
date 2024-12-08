@@ -7,20 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.practicedetail.PracticeDetailActivity">
 
-    <!--<com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:minWidth="0dp"
-        app:iconPadding="8dp"
-        app:icon="@drawable/baseline_arrow_back_24"
-        android:text="@string/back"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:contentDescription="@string/back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />-->
-
     <ImageButton
         android:id="@+id/backButton"
         android:layout_width="wrap_content"
@@ -39,7 +25,7 @@
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:contentDescription="@string/practice"
-        android:src="@drawable/virtual"
+        android:src="@drawable/logo_app_kecil"
         android:layout_marginTop="150dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,7 +36,9 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginBottom="100dp"
+        app:backgroundTint="@color/md_theme_primary"
         app:icon="@drawable/baseline_mic_24"
+        app:iconTint="@color/white"
         app:iconSize="55dp"
         app:iconPadding="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -63,7 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:textStyle="bold"
-        android:text="@string/good"
+        android:text="@string/click"
         app:layout_constraintEnd_toEndOf="@+id/btn_mic"
         app:layout_constraintStart_toStartOf="@+id/btn_mic"
         app:layout_constraintTop_toBottomOf="@+id/btn_mic" />
