@@ -25,6 +25,7 @@ import java.io.FileOutputStream
 import java.io.IOException
 import kotlin.concurrent.thread
 
+
 class PracticeDetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityPracticeDetailBinding
@@ -84,6 +85,22 @@ class PracticeDetailActivity : AppCompatActivity() {
         }
     }
 
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == REQUEST_MIC_PERMISSION) {
+            if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                Toast.makeText(this, "Izin mikrofon diberikan.", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "Izin mikrofon ditolak.", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+
     private fun startRecording() {
         try {
             // Ubah ekstensi file ke .wav
@@ -100,15 +117,16 @@ class PracticeDetailActivity : AppCompatActivity() {
                     Manifest.permission.RECORD_AUDIO
                 ) != PackageManager.PERMISSION_GRANTED
             ) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
+                Toast.makeText(this, "Izin mikrofon belum diberikan.", Toast.LENGTH_SHORT).show()
+
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(Manifest.permission.RECORD_AUDIO),
+                    REQUEST_MIC_PERMISSION
+                )
                 return
             }
+
             audioRecord = AudioRecord(
                 MediaRecorder.AudioSource.MIC,
                 RECORDER_SAMPLE_RATE,
@@ -288,6 +306,7 @@ class PracticeDetailActivity : AppCompatActivity() {
     }
 
     companion object {
+        private const val REQUEST_MIC_PERMISSION = 1
         private const val RECORDER_SAMPLE_RATE = 16000 // Sampling rate (Hz)
         private const val RECORDER_CHANNELS = AudioFormat.CHANNEL_IN_MONO // Audio channel configuration
         private const val RECORDER_AUDIO_ENCODING = AudioFormat.ENCODING_PCM_16BIT // Audio encoding format
