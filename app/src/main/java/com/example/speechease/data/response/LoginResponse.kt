@@ -3,12 +3,11 @@ package com.example.speechease.data.response
 data class LoginResponse(
     val error: Boolean,
     val message: String,
-    val data: LoginData?
+    val loginResult: LoginResult
 )
 
-data class LoginData(
+data class LoginResult(
     val userId: String,
     val name: String,
-    val email: String,
     val token: String
 )

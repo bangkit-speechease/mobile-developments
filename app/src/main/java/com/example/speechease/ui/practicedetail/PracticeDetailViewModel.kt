@@ -4,13 +4,20 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.speechease.data.pref.UserPreference
+import com.example.speechease.data.repository.ContentRepository
 import com.example.speechease.data.retrofit.ApiService
+import kotlinx.coroutines.flow.first
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 
-class PracticeDetailViewModel(private val apiService: ApiService) : ViewModel() {
+class PracticeDetailViewModel(
+    private val apiService: ApiService,
+    private val userPreference: UserPreference,
+    private val contentRepository: ContentRepository
+) : ViewModel() {
 
     private val _predictedLabel = MutableLiveData<String>()
     val predictedLabel: LiveData<String> get() = _predictedLabel
@@ -29,7 +36,13 @@ class PracticeDetailViewModel(private val apiService: ApiService) : ViewModel() 
         val multipartBody = MultipartBody.Part.createFormData("file", file.name, requestFile)
 
         try {
-            val response = apiService.submitAudioFeedback(multipartBody)
+            val token = userPreference.getSession().first().token
+
+            Log.d("PracticeDetailViewModel", "Mengirim request ke API...")
+            //val response = apiService.submitAudioFeedback(multipartBody)
+            //val response = apiService.submitAudioFeedback(multipartBody, "Bearer $token")
+            val response = contentRepository.submitAudioFeedback(multipartBody)
+            Log.d("PracticeDetailViewModel", "Respons dari API: $response")
             if (response.isSuccessful && response.body() != null) {
                 val audioResponse = response.body()!!
                 // Correctly access predicted_label from feedback
@@ -44,6 +57,7 @@ class PracticeDetailViewModel(private val apiService: ApiService) : ViewModel() 
             }
 
         } catch (e: Exception) {
+            Log.e("PracticeDetailViewModel", "Error saat mengirim request ke API: ${e.message}", e)
             _uploadStatus.value = "Terjadi kesalahan: ${e.message}"
         }
     }

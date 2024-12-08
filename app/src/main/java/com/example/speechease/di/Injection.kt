@@ -1,18 +1,29 @@
 package com.example.speechease.di
 
 import android.content.Context
+import com.example.speechease.data.pref.UserPreference
 import com.example.speechease.data.repository.ContentRepository
 import com.example.speechease.data.repository.UserRepository
 import com.example.speechease.data.retrofit.ApiConfig
+import com.example.speechease.ui.practicedetail.PracticeDetailViewModel
 
 object Injection {
-    fun provideUserRepository(context: Context): UserRepository {
-        val apiService = ApiConfig.getApiService()
-        return UserRepository(apiService)
+    fun provideRepository(context: Context): UserRepository {
+        val userPreference = UserPreference.getInstance(context)
+        val apiService = ApiConfig.getApiService(userPreference)
+        return UserRepository.getInstance(context, apiService)
     }
 
     fun provideContentRepository(context: Context): ContentRepository {
-        val apiService = ApiConfig.getApiService()
-        return ContentRepository(apiService)
+        val userPreference = UserPreference.getInstance(context)
+        val apiService = ApiConfig.getApiService(userPreference)
+        return ContentRepository(apiService, userPreference)
+    }
+
+    fun providePracticeDetailViewModel(context: Context): PracticeDetailViewModel {
+        val userPreference = UserPreference.getInstance(context)
+        val apiService = ApiConfig.getApiService(userPreference)
+        val contentRepository = provideContentRepository(context)
+        return PracticeDetailViewModel(apiService, userPreference, contentRepository)
     }
 }

@@ -65,4 +65,14 @@ dependencies {
 
     implementation(libs.material)
     implementation (libs.androidx.lifecycle.runtime.ktx)
+
+    // datastore
+    implementation(libs.androidx.datastore.preferences)
+    implementation(libs.androidx.activity.ktx)
+
+    // inject
+    implementation(libs.javax.inject)
+
+    // worker
+    implementation(libs.androidx.work.runtime.ktx)
 }

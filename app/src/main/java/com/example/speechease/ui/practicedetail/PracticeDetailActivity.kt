@@ -13,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.speechease.R
+import com.example.speechease.data.pref.UserPreference
+import com.example.speechease.data.repository.UserRepository
 import com.example.speechease.data.retrofit.ApiConfig
 import com.example.speechease.data.retrofit.ApiService
 import com.example.speechease.databinding.ActivityPracticeDetailBinding
@@ -32,20 +34,35 @@ class PracticeDetailActivity : AppCompatActivity() {
 
     private var isRecording = false // Flag untuk status perekaman
 
+    // Inisialisasi UserPreference
+    private val userPreference: UserPreference by lazy {
+        UserPreference.getInstance(this)
+    }
+
     // Inisialisasi ApiService
     private val apiService: ApiService by lazy {
-        ApiConfig.getApiService()
+        ApiConfig.getApiService(userPreference)
+    }
+
+    // Inisialisasi UserRepository
+    private val userRepository: UserRepository by lazy {
+        UserRepository.getInstance(this, apiService) // Diperbarui: Memberikan context dan apiService
     }
 
     // Inisialisasi ViewModel dengan ViewModelFactory
+    //private lateinit var viewModel: PracticeDetailViewModel
     private val viewModel: PracticeDetailViewModel by viewModels {
-        ViewModelFactory(apiService)
+        ViewModelFactory.getInstance(this)
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPracticeDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Membuat Instance
+        //viewModel = ViewModelProvider(this, ViewModelFactory.getInstance(this))[PracticeDetailViewModel::class.java]
 
         binding.btnMic.setOnClickListener {
             if (isRecording) {

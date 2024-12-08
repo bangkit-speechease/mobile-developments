@@ -1,26 +1,31 @@
 package com.example.speechease.data.retrofit
 
+import com.example.speechease.data.pref.AuthInterceptor
+import com.example.speechease.data.pref.UserPreference
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-
 object ApiConfig {
-
     private const val BASE_URL = "https://speechease-iw10810.et.r.appspot.com/"
 
-    fun getApiService(): ApiService {
+    fun getApiService(userPreference: UserPreference): ApiService {
         val loggingInterceptor = HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
         }
 
+        val authInterceptor = AuthInterceptor(userPreference)
+
         val client = OkHttpClient.Builder()
-            .addInterceptor(loggingInterceptor)
-            .connectTimeout(300, TimeUnit.SECONDS)
-            .readTimeout(300, TimeUnit.SECONDS)
-            .writeTimeout(300, TimeUnit.SECONDS)
+            .apply {
+                addInterceptor(loggingInterceptor)
+                addInterceptor(authInterceptor)
+                connectTimeout(300, TimeUnit.SECONDS)
+                readTimeout(300, TimeUnit.SECONDS)
+                writeTimeout(300, TimeUnit.SECONDS)
+            }
             .build()
 
         val retrofit = Retrofit.Builder()
