@@ -6,7 +6,8 @@
     <string name="progress">Progress</string>
     <string name="profile">Profile</string>
     <string name="name_practice">Practice Name</string>
-    <string name="welcome">Halo, Budi</string>
+    <!--<string name="welcome">Halo, Budi</string>-->
+    <string name="welcome">Halo, %1$s</string>
     <string name="name">$name</string>
     <string name="ayo_mulai_belajar">Ayo Mulai Belajar!</string>
     <string name="belajar_sambil_bermain">Belajar Sambil Bermain</string>
