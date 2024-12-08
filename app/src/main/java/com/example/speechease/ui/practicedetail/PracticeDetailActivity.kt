@@ -1,19 +1,16 @@
 package com.example.speechease.ui.practicedetail
 
 import android.Manifest
-import android.content.Context
 import android.content.pm.PackageManager
 import android.media.AudioFormat
 import android.media.AudioRecord
 import android.media.MediaRecorder
 import android.os.Bundle
-import android.os.Environment
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.speechease.R
 import com.example.speechease.data.pref.UserPreference
@@ -21,11 +18,9 @@ import com.example.speechease.data.repository.UserRepository
 import com.example.speechease.data.retrofit.ApiConfig
 import com.example.speechease.data.retrofit.ApiService
 import com.example.speechease.databinding.ActivityPracticeDetailBinding
-import com.example.speechease.di.Injection
 import com.example.speechease.ui.ViewModelFactory
 import kotlinx.coroutines.launch
 import okhttp3.internal.and
-import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import kotlin.concurrent.thread
@@ -45,7 +40,7 @@ class PracticeDetailActivity : AppCompatActivity() {
 
     // Inisialisasi ApiService
     private val apiService: ApiService by lazy {
-        ApiConfig.getApiService(this, userPreference)
+        ApiConfig.getApiService(userPreference)
     }
 
     // Inisialisasi UserRepository
@@ -130,7 +125,7 @@ class PracticeDetailActivity : AppCompatActivity() {
 
             // Mulai thread untuk menulis data audio ke file WAV
             thread(true) {
-                writeAudioDataToFile(audioFile, bufferSize)
+                writeAudioDataToFile(audioFile)
             }
 
         } catch (e: Exception) {
@@ -162,7 +157,7 @@ class PracticeDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun writeAudioDataToFile(path: String, bufferSize: Int) {
+    private fun writeAudioDataToFile(path: String) {
         val sData = ShortArray(BufferElements2Rec)
         var os: FileOutputStream? = null
         try {

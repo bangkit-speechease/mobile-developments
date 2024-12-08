@@ -10,19 +10,19 @@ import com.example.speechease.ui.practicedetail.PracticeDetailViewModel
 object Injection {
     fun provideRepository(context: Context): UserRepository {
         val userPreference = UserPreference.getInstance(context)
-        val apiService = ApiConfig.getApiService(context, userPreference)
+        val apiService = ApiConfig.getApiService(userPreference)
         return UserRepository.getInstance(context, apiService)
     }
 
     fun provideContentRepository(context: Context): ContentRepository {
         val userPreference = UserPreference.getInstance(context)
-        val apiService = ApiConfig.getApiService(context, userPreference)
+        val apiService = ApiConfig.getApiService(userPreference)
         return ContentRepository(apiService, userPreference)
     }
 
     fun providePracticeDetailViewModel(context: Context): PracticeDetailViewModel {
         val userPreference = UserPreference.getInstance(context)
-        val apiService = ApiConfig.getApiService(context, userPreference)
+        val apiService = ApiConfig.getApiService(userPreference)
         val contentRepository = provideContentRepository(context)
         return PracticeDetailViewModel(apiService, userPreference, contentRepository)
     }

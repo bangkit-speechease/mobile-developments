@@ -3,26 +3,18 @@ package com.example.speechease.ui.login
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.view.WindowInsets
-import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.WorkManager
 import com.example.speechease.MainActivity
 import com.example.speechease.databinding.ActivityLoginBinding
 import com.example.speechease.di.Injection
-import com.example.speechease.ui.worker.SaveSessionWorker
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
-    /*private val viewModel by viewModels<LoginViewModel> {
-        ViewModelFactory.getInstance(this)
-    }*/
+
     private lateinit var viewModel: LoginViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,7 +25,6 @@ class LoginActivity : AppCompatActivity() {
         val userRepository = Injection.provideRepository(this)
         viewModel = LoginViewModel(userRepository)
 
-        setupView()
         setupAction()
         playAnimation()
 
@@ -64,19 +55,6 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         }
-    }
-
-    private fun setupView() {
-        @Suppress("DEPRECATION")
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            window.insetsController?.hide(WindowInsets.Type.statusBars())
-        } else {
-            window.setFlags(
-                WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN
-            )
-        }
-        supportActionBar?.hide()
     }
 
     private fun setupAction() {

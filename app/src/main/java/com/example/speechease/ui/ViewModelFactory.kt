@@ -1,11 +1,11 @@
 package com.example.speechease.ui
 
+import android.annotation.SuppressLint
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.speechease.MainViewModel
 import com.example.speechease.data.repository.UserRepository
-import com.example.speechease.data.retrofit.ApiService
 import com.example.speechease.di.Injection
 import com.example.speechease.ui.login.LoginViewModel
 import com.example.speechease.ui.practicedetail.PracticeDetailViewModel
@@ -38,6 +38,7 @@ class ViewModelFactory(
     }
 
     companion object {
+        @SuppressLint("StaticFieldLeak")
         @Volatile
         private var INSTANCE: ViewModelFactory? = null
         @JvmStatic

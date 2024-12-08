@@ -1,6 +1,5 @@
 package com.example.speechease.data.retrofit
 
-import android.content.Context
 import com.example.speechease.data.pref.AuthInterceptor
 import com.example.speechease.data.pref.UserPreference
 import okhttp3.OkHttpClient
@@ -12,7 +11,7 @@ import java.util.concurrent.TimeUnit
 object ApiConfig {
     private const val BASE_URL = "https://speechease-iw10810.et.r.appspot.com/"
 
-    fun getApiService(context: Context, userPreference: UserPreference): ApiService {
+    fun getApiService(userPreference: UserPreference): ApiService {
         val loggingInterceptor = HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
         }

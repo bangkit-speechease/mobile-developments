@@ -2,7 +2,6 @@ package com.example.speechease
 
 import android.os.Bundle
 import android.util.Log
-import androidx.activity.result.launch
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -57,7 +56,7 @@ class MainActivity : AppCompatActivity() {
 
         WorkManager.getInstance(this).enqueueUniquePeriodicWork(
             "saveSession",
-            ExistingPeriodicWorkPolicy.REPLACE,
+            ExistingPeriodicWorkPolicy.UPDATE,
             saveSessionRequest
         )
 

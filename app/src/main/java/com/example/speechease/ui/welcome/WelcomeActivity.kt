@@ -3,17 +3,13 @@ package com.example.speechease.ui.welcome
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.view.WindowInsets
-import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.speechease.MainActivity
 import com.example.speechease.data.pref.UserModel
-import com.example.speechease.data.pref.UserPreference
 import com.example.speechease.databinding.ActivityWelcomeBinding
 import com.example.speechease.di.Injection
 import com.example.speechease.ui.login.LoginActivity
@@ -29,7 +25,6 @@ class WelcomeActivity : AppCompatActivity() {
         binding = ActivityWelcomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setupView()
         setupAction()
         playAnimation()
     }
@@ -39,28 +34,15 @@ class WelcomeActivity : AppCompatActivity() {
 
         lifecycleScope.launch {
             val userRepository = Injection.provideRepository(this@WelcomeActivity)
-            val user: UserModel? = userRepository.getUser().first()
+            val user: UserModel = userRepository.getUser().first()
 
-            if (user?.isLogin == true && user.token.isNotEmpty()) {
+            if (user.isLogin && user.token.isNotEmpty()) {
                 startActivity(Intent(this@WelcomeActivity, MainActivity::class.java))
                 finish()
             } else {
                 Log.d("WelcomeActivity", "Pengguna belum login atau token kosong.")
             }
         }
-    }
-
-    private fun setupView() {
-        @Suppress("DEPRECATION")
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            window.insetsController?.hide(WindowInsets.Type.statusBars())
-        } else {
-            window.setFlags(
-                WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN
-            )
-        }
-        supportActionBar?.hide()
     }
 
     private fun setupAction() {
