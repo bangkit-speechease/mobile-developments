@@ -13,6 +13,7 @@ import com.example.speechease.data.pref.UserModel
 import com.example.speechease.data.repository.UserRepository
 import com.example.speechease.databinding.ActivityMainBinding
 import com.example.speechease.di.Injection
+import com.example.speechease.ui.guide.GuideFragment
 import com.example.speechease.ui.home.HomeFragment
 import com.example.speechease.ui.profile.ProfileFragment
 import com.example.speechease.ui.progress.ProgressFragment
@@ -38,12 +39,13 @@ class MainActivity : AppCompatActivity() {
             Log.d("MainActivity", "User session: $user")
 
             if (savedInstanceState == null) {
-                loadFragment(HomeFragment())
+                loadFragment(GuideFragment())
             }
         }
 
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
+                R.id.nav_guide -> loadFragment(GuideFragment())
                 R.id.nav_home -> loadFragment(HomeFragment())
                 R.id.nav_progress -> loadFragment(ProgressFragment())
                 R.id.nav_profile -> loadFragment(ProfileFragment())

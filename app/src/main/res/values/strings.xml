@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">SpeechEase</string>
+    <string name="guide">Guide</string>
     <string name="home">Home</string>
     <string name="interactive">Interactive</string>
     <string name="practice">Practice</string>
@@ -51,4 +52,22 @@
     <string name="kata">Kata</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="practice_guide_title">Cara Menggunakan Fitur Practice</string>
+    <string name="practice_guide_content">
+        \n
+        1. Tekan <b>Practice</b> di halaman <b>Home</b>.\n
+        2. <b>Pilih latihan</b> yang ingin kamu coba!\n
+        3. Ikuti panduan gambar dan kata, lalu <b>tekan \n\t\t\ttombol Rekam</b> untuk mengucapkannya.\n
+        4. Dapatkan <b>Feedback</b>, apakah pelafalan kamu \n\t\t\tsudah benar atau coba lagi!
+    </string>
+
+    <string name="interactive_guide_title">Cara Menggunakan Fitur Interactive</string>
+    <string name="interactive_guide_content">
+        \n
+        1. Tekan <b>Interactive</b> di halaman <b>Home</b>.\n
+        2. Lihat gambar dan dengarkan pertanyaannya \n\t\t\tdengan menekan <b>tombol Play</b>.\n
+        3. <b>Jawab pertanyaan</b>, lalu tekan <b>tombol Next</b> \n\t\t\tuntuk lanjut ke soal berikutnya!
+    </string>
+
 </resources>
