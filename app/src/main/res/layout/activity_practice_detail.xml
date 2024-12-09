@@ -38,11 +38,24 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/kata"
-        android:textSize="16sp"
+        android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/img_practice"
-        app:layout_constraintStart_toStartOf="@+id/img_practice"
+        app:layout_constraintStart_toEndOf="@+id/btn_play"
         app:layout_constraintTop_toBottomOf="@+id/img_practice" />
+
+    <ImageButton
+        android:id="@+id/btn_play"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/circle_button"
+        android:padding="8dp"
+        android:src="@drawable/baseline_play_arrow_24"
+        app:tint="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_text"
+        app:layout_constraintStart_toStartOf="@+id/img_practice"
+        app:layout_constraintTop_toTopOf="@+id/tv_text" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_mic"

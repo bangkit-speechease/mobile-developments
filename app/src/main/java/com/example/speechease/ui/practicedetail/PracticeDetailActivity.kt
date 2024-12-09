@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.media.AudioFormat
 import android.media.AudioRecord
+import android.media.MediaPlayer
 import android.media.MediaRecorder
 import android.os.Bundle
 import android.os.Handler
@@ -33,6 +34,8 @@ class PracticeDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPracticeDetailBinding
     private lateinit var audioRecord: AudioRecord
     private lateinit var audioFile: String
+    private var mediaPlayer: MediaPlayer? = null
+    private var isPlaying = false
 
     private var isRecording = false // Flag untuk status perekaman
 
@@ -47,6 +50,17 @@ class PracticeDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityPracticeDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        mediaPlayer = MediaPlayer()
+
+        binding.btnPlay.isEnabled = false
+        binding.btnPlay.setOnClickListener {
+            if (isPlaying) {
+                stopPlaying()
+            } else {
+                startPlaying()
+            }
+        }
 
         val contentId = intent.getStringExtra("CONTENT_ID")
         Log.d("CONTENT_ID","$contentId")
@@ -101,6 +115,44 @@ class PracticeDetailActivity : AppCompatActivity() {
                 Log.e("PracticeDetailActivity", "Detail konten tidak ditemukan")
             }
         }
+
+        viewModel.audioUrlState.observe(this) { state ->
+            when (state) {
+                is AudioUrlState.Loading -> {
+                    binding.btnPlay.isEnabled = false
+                }
+                is AudioUrlState.Success -> {
+                    binding.btnPlay.isEnabled = true
+                    mediaPlayer?.reset()
+                    mediaPlayer?.setDataSource(state.audioUrl)
+                    mediaPlayer?.setOnPreparedListener {
+                        isPlaying = false
+                        binding.btnPlay.setImageResource(R.drawable.baseline_play_arrow_24)
+                        binding.btnPlay.isEnabled = true
+                    }
+                    mediaPlayer?.prepareAsync()
+                }
+                is AudioUrlState.Error -> {
+                    binding.btnPlay.isEnabled = false
+                    Toast.makeText(this, state.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    private fun startPlaying() {
+        if (mediaPlayer?.isPlaying == false) {
+            mediaPlayer?.start()
+            isPlaying = true
+            binding.btnPlay.setImageResource(R.drawable.baseline_stop_24)
+        }
+    }
+
+    private fun stopPlaying() {
+        mediaPlayer?.stop()
+        mediaPlayer?.reset()
+        isPlaying = false
+        binding.btnPlay.setImageResource(R.drawable.baseline_play_arrow_24)
     }
 
     override fun onRequestPermissionsResult(

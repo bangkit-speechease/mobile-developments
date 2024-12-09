@@ -32,23 +32,33 @@ class PracticeDetailViewModel(
     private val _contentDetail = MutableLiveData<ContentData?>()
     val contentDetail: LiveData<ContentData?> get() = _contentDetail
 
+    private val _audioUrlState = MutableLiveData<AudioUrlState>(AudioUrlState.Loading)
+    val audioUrlState: LiveData<AudioUrlState> get() = _audioUrlState
+
 
     fun setContentId(contentId: String?) {
         _contentId.value = contentId
     }
 
     fun fetchContentDetail(contentId: String) {
+        _audioUrlState.value = AudioUrlState.Loading
         viewModelScope.launch {
             try {
                 val response = contentRepository.getContentDetails(contentId)
                 if (response.isSuccessful && response.body() != null) {
                     val detailData = response.body()?.data?.firstOrNull()
-                    _contentDetail.value = detailData
+                    if (detailData != null && detailData.audioGuideUrl != null) {
+                        _audioUrlState.value = AudioUrlState.Success(detailData.audioGuideUrl)
+                        _contentDetail.value = detailData
+                    } else {
+                        _audioUrlState.value = AudioUrlState.Error("URL audio tidak tersedia")
+                    }
                 } else {
-                    Log.e("PracticeDetailViewModel", "Gagal mengambil data: ${response.message()}")
+                    _audioUrlState.value =
+                        AudioUrlState.Error("Gagal mengambil data: ${response.message()}")
                 }
             } catch (e: Exception) {
-                Log.e("PracticeDetailViewModel", "Error: ${e.message}", e)
+                _audioUrlState.value = AudioUrlState.Error("Error: ${e.message}")
             }
         }
     }
