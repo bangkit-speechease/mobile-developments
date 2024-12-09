@@ -14,7 +14,7 @@
         <ImageView
             android:id="@+id/img_practice"
             android:layout_width="160dp"
-            android:layout_height="80dp"
+            android:layout_height="100dp"
             android:contentDescription="@string/name_practice"
             android:scaleType="centerCrop" />
 
@@ -23,6 +23,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/name_practice"
+            android:textSize="16sp"
+            android:textStyle="bold"
             android:paddingTop="8dp"
             android:layout_marginStart="8dp"/>
     </LinearLayout>
