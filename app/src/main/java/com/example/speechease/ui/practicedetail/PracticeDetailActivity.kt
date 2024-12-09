@@ -130,6 +130,10 @@ class PracticeDetailActivity : AppCompatActivity() {
                         binding.btnPlay.setImageResource(R.drawable.baseline_play_arrow_24)
                         binding.btnPlay.isEnabled = true
                     }
+                    mediaPlayer?.setOnCompletionListener {
+                        isPlaying = false
+                        binding.btnPlay.setImageResource(R.drawable.baseline_play_arrow_24)
+                    }
                     mediaPlayer?.prepareAsync()
                 }
                 is AudioUrlState.Error -> {
