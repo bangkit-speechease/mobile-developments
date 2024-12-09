@@ -13,6 +13,7 @@ import com.example.speechease.R
 import com.example.speechease.databinding.FragmentHomeBinding
 import com.example.speechease.di.Injection
 import com.example.speechease.ui.interactive.InteractiveActivity
+import com.example.speechease.ui.interactive.InteractiveOneActivity
 import com.example.speechease.ui.practicedetail.PracticeDetailActivity
 import com.example.speechease.ui.progress.ProgressFragment
 import kotlinx.coroutines.flow.first
@@ -67,7 +68,7 @@ class HomeFragment : Fragment() {
         }
 
         binding.cardInteraktif.setOnClickListener {
-            val intent = Intent(requireContext(), InteractiveActivity::class.java)
+            val intent = Intent(requireContext(), InteractiveOneActivity::class.java)
             startActivity(intent)
         }
     }
