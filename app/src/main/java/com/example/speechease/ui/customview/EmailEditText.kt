@@ -41,10 +41,10 @@ class EmailEditText : AppCompatEditText {
             }
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                if (!Patterns.EMAIL_ADDRESS.matcher(s).matches()) {
-                    error = context.getString(R.string.email_error)
+                error = if (!Patterns.EMAIL_ADDRESS.matcher(s).matches()) {
+                    context.getString(R.string.email_error)
                 } else {
-                    error = null
+                    null
                 }
             }
 

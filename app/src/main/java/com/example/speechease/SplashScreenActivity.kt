@@ -35,14 +35,19 @@ class SplashScreenActivity : AppCompatActivity() {
 
             if (user.isLogin && user.token.isNotEmpty()) {
                 // Langsung menuju MainActivity jika sudah login
-                startActivity(Intent(this@SplashScreenActivity, MainActivity::class.java))
+                Handler(Looper.getMainLooper()).postDelayed({
+                    val intent = Intent(this@SplashScreenActivity, MainActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+                    startActivity(intent)
+                    finish()
+                }, 2000)
             } else {
                 // Lanjutkan ke WelcomeActivity setelah delay jika belum login
                 Handler(Looper.getMainLooper()).postDelayed({
                     val intent = Intent(this@SplashScreenActivity, WelcomeActivity::class.java)
                     startActivity(intent)
                     finish()
-                }, 3000)
+                }, 2000)
             }
         }
     }

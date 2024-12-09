@@ -6,7 +6,9 @@ import com.example.speechease.data.response.ContentDetailResponse
 import com.example.speechease.data.response.ContentListResponse
 import com.example.speechease.data.retrofit.ApiService
 import kotlinx.coroutines.flow.first
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Response
 
 class ContentRepository(
@@ -15,15 +17,26 @@ class ContentRepository(
 ) {
 
     suspend fun getContentList(): ContentListResponse {
-        return apiService.getContentList()
+        val token = userPreference.getSession().first().token
+        return apiService.getContentList("Bearer $token")
     }
 
     suspend fun getContentDetails(contentId: String): Response<ContentDetailResponse> {
-        return apiService.getContentDetails(contentId)
+        val token = userPreference.getSession().first().token
+        return apiService.getContentDetails(contentId, "Bearer $token")
     }
 
-    suspend fun submitAudioFeedback(audioFile: MultipartBody.Part): Response<AudioFeedbackResponse> {
-        val token = userPreference.getSession().first().token
-        return apiService.submitAudioFeedback(audioFile, "Bearer $token")
+    suspend fun submitAudioFeedback(
+        file: MultipartBody.Part,
+        userId: String,
+        contentId: String,
+        token: String
+    ): Response<AudioFeedbackResponse> {
+        return apiService.submitAudioFeedback(
+            file = file,
+            userId = userId.toRequestBody("text/plain".toMediaTypeOrNull()),
+            contentId = contentId.toRequestBody("text/plain".toMediaTypeOrNull()),
+            authorization = "Bearer $token"
+        )
     }
 }

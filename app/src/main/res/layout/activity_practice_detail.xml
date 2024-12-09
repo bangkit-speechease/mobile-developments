@@ -18,7 +18,8 @@
         android:src="@drawable/baseline_arrow_back_ios_new_24"
         app:tint="@color/md_theme_onPrimary"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
 
     <ImageView
         android:id="@+id/img_practice"
@@ -26,10 +27,22 @@
         android:layout_height="300dp"
         android:contentDescription="@string/practice"
         android:src="@drawable/placeholder_image"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="120dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/kata"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/img_practice"
+        app:layout_constraintStart_toStartOf="@+id/img_practice"
+        app:layout_constraintTop_toBottomOf="@+id/img_practice" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_mic"

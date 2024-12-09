@@ -22,8 +22,8 @@ object Injection {
 
     fun providePracticeDetailViewModel(context: Context): PracticeDetailViewModel {
         val userPreference = UserPreference.getInstance(context)
-        val apiService = ApiConfig.getApiService(userPreference)
+        ApiConfig.getApiService(userPreference)
         val contentRepository = provideContentRepository(context)
-        return PracticeDetailViewModel(apiService, userPreference, contentRepository)
+        return PracticeDetailViewModel(userPreference, contentRepository)
     }
 }

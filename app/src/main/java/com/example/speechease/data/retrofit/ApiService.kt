@@ -10,12 +10,12 @@ import com.example.speechease.data.response.RegisterResponse
 import com.example.speechease.data.response.UpdateUserResponse
 import com.example.speechease.data.response.UserDetailResponse
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Header
-import retrofit2.http.Headers
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.PUT
@@ -46,16 +46,23 @@ interface ApiService {
     suspend fun deleteUser(@Path("userId") userId: String): DeleteUserResponse
 
     @GET("/content")
-    suspend fun getContentList(): ContentListResponse
+    suspend fun getContentList(
+        @Header("Authorization") token: String
+    ): ContentListResponse
 
     @GET("content/{contentId}")
-    suspend fun getContentDetails(@Path("contentId") contentId: String): Response<ContentDetailResponse>
+    suspend fun getContentDetails(
+        @Path("contentId") contentId: String,
+        @Header("Authorization") token: String
+    ): Response<ContentDetailResponse>
 
-    @Headers("Content-Type: multipart/form-data")
     @Multipart
     @POST("feedback")
     suspend fun submitAudioFeedback(
         @Part file: MultipartBody.Part,
+        @Part("userId") userId: RequestBody,
+        @Part("contentId") contentId: RequestBody,
         @Header("Authorization") authorization: String
     ): Response<AudioFeedbackResponse>
+
 }

@@ -4,19 +4,20 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.speechease.data.pref.UserPreference
 import com.example.speechease.data.repository.ContentRepository
-import com.example.speechease.data.retrofit.ApiService
+import com.example.speechease.data.response.ContentData
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 
 class PracticeDetailViewModel(
-    private val apiService: ApiService,
     private val userPreference: UserPreference,
-    private val contentRepository: ContentRepository
+    private val contentRepository: ContentRepository,
 ) : ViewModel() {
 
     private val _predictedLabel = MutableLiveData<String>()
@@ -24,6 +25,33 @@ class PracticeDetailViewModel(
 
     private val _uploadStatus = MutableLiveData<String>()
     val uploadStatus: LiveData<String> get() = _uploadStatus
+
+    private val _contentId = MutableLiveData<String?>()
+    private val contentId: LiveData<String?> get() = _contentId
+
+    private val _contentDetail = MutableLiveData<ContentData?>()
+    val contentDetail: LiveData<ContentData?> get() = _contentDetail
+
+
+    fun setContentId(contentId: String?) {
+        _contentId.value = contentId
+    }
+
+    fun fetchContentDetail(contentId: String) {
+        viewModelScope.launch {
+            try {
+                val response = contentRepository.getContentDetails(contentId)
+                if (response.isSuccessful && response.body() != null) {
+                    val detailData = response.body()?.data?.firstOrNull()
+                    _contentDetail.value = detailData
+                } else {
+                    Log.e("PracticeDetailViewModel", "Gagal mengambil data: ${response.message()}")
+                }
+            } catch (e: Exception) {
+                Log.e("PracticeDetailViewModel", "Error: ${e.message}", e)
+            }
+        }
+    }
 
     suspend fun uploadAudio(filePath: String) {
         val file = File(filePath)
@@ -34,19 +62,26 @@ class PracticeDetailViewModel(
 
         val requestFile = file.asRequestBody("audio/wav".toMediaTypeOrNull())
         val multipartBody = MultipartBody.Part.createFormData("file", file.name, requestFile)
+        val token = userPreference.getSession().first().token
+        val userId = userPreference.getSession().first().userId
+        val contentIdValue = _contentId.value ?: return
 
         try {
-            val token = userPreference.getSession().first().token
 
             Log.d("PracticeDetailViewModel", "Mengirim request ke API...")
-            //val response = apiService.submitAudioFeedback(multipartBody)
-            //val response = apiService.submitAudioFeedback(multipartBody, "Bearer $token")
-            val response = contentRepository.submitAudioFeedback(multipartBody)
+            val response = contentRepository.submitAudioFeedback(
+                file = multipartBody,
+                userId = userId,
+                contentId = contentIdValue,
+                token = token
+            )
+            Log.d("PracticeDetailViewModel", "Request URL: https://speechease-iw10810.et.r.appspot.com/feedback")
+            Log.d("PracticeDetailViewModel", "Request Payload: userId=$userId, contentId=$contentId, token=$token")
             Log.d("PracticeDetailViewModel", "Respons dari API: $response")
             if (response.isSuccessful && response.body() != null) {
                 val audioResponse = response.body()!!
                 // Correctly access predicted_label from feedback
-                val label = audioResponse.feedback?.predicted_label ?: "Label tidak tersedia"
+                val label = audioResponse.feedback?.predictedLabel ?: "Label tidak tersedia"
 
                 Log.d("PracticeDetailViewModel", "Predicted Label: $label")
                 _predictedLabel.value = label
