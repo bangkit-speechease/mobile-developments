@@ -2,6 +2,7 @@ package com.example.speechease.ui.practice
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -64,5 +65,11 @@ class PracticeActivity : AppCompatActivity() {
         viewModel.isLoading.observe(this) { isLoading ->
             binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
         }
+
+        viewModel.practiceList.observe(this) { practiceList ->
+            Log.d("PracticeActivity", "Received ${practiceList?.size} items")
+            adapter.submitList(practiceList)
+        }
+
     }
 }

@@ -3,7 +3,7 @@ package com.example.speechease.data.response
 data class ContentListResponse(
     val error: Boolean,
     val message: String,
-    val data: List<ContentData>?
+    val data: List<ContentData>? = listOf()
 )
 
 data class ContentData(

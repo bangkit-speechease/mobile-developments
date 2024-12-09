@@ -21,6 +21,7 @@ import com.example.speechease.databinding.ActivityPracticeDetailBinding
 import com.example.speechease.ui.ViewModelFactory
 import com.example.speechease.ui.feedback.FeedbackFalseActivity
 import com.example.speechease.ui.feedback.FeedbackTrueActivity
+import com.example.speechease.ui.practice.PracticeActivity
 import kotlinx.coroutines.launch
 import okhttp3.internal.and
 import java.io.FileOutputStream
@@ -54,8 +55,10 @@ class PracticeDetailActivity : AppCompatActivity() {
             viewModel.fetchContentDetail(it)
         }
 
-        // Membuat Instance
-        //viewModel = ViewModelProvider(this, ViewModelFactory.getInstance(this))[PracticeDetailViewModel::class.java]
+        binding.backButton.setOnClickListener {
+            Intent(this, PracticeActivity::class.java)
+            finish()
+        }
 
         binding.btnMic.setOnClickListener {
             if (isRecording) {

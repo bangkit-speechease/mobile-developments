@@ -5,8 +5,8 @@ import android.media.AudioAttributes
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
-import com.example.speechease.MainActivity
 import com.example.speechease.R
 import com.example.speechease.databinding.ActivityInteractiveFourBinding
 import java.io.IOException
@@ -46,9 +46,16 @@ class InteractiveFourActivity : AppCompatActivity() {
         }
 
         binding.backButton.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            Intent(this, InteractiveThreeActivity::class.java)
+            finish()
         }
+
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                Intent(this@InteractiveFourActivity, InteractiveThreeActivity::class.java)
+                finish()
+            }
+        })
     }
 
     private fun init() {
@@ -75,12 +82,6 @@ class InteractiveFourActivity : AppCompatActivity() {
             Log.e("MediaPlayerError", "Error code: $what, Extra: $extra")
             false
         }
-    }
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
     }
 
     override fun onDestroy() {
