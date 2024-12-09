@@ -20,6 +20,21 @@
         android:theme="@style/Theme.SpeechEase"
         tools:targetApi="31">
         <activity
+            android:name=".ui.interactive.InteractiveFiveActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.interactive.InteractiveFourActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.interactive.InteractiveThreeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.interactive.InteractiveTwoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.interactive.InteractiveOneActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.feedback.FeedbackFalseActivity"
             android:exported="false" />
         <activity

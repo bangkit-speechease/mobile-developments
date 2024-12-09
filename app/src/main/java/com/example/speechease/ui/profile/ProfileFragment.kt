@@ -5,14 +5,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.example.speechease.R
+import androidx.lifecycle.lifecycleScope
+import com.example.speechease.databinding.FragmentProfileBinding
+import com.example.speechease.di.Injection
 import com.example.speechease.ui.ViewModelFactory
 import com.example.speechease.ui.welcome.WelcomeActivity
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 
 class ProfileFragment : Fragment() {
+
+    private var _binding: FragmentProfileBinding? = null
+    private val binding get() = _binding!!
 
     companion object;
 
@@ -24,8 +30,10 @@ class ProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val view = inflater.inflate(R.layout.fragment_profile, container, false)
-        val logoutButton = view.findViewById<Button>(R.id.logout)
+        _binding = FragmentProfileBinding.inflate(inflater, container, false)
+        val view = binding.root
+
+        val logoutButton = binding.logout
 
         logoutButton.setOnClickListener {
             viewModel.logout()
@@ -33,6 +41,14 @@ class ProfileFragment : Fragment() {
             startActivity(intent)
             requireActivity().finish()
         }
+
+        val userRepository = Injection.provideRepository(requireContext())
+        lifecycleScope.launch {
+            val user = userRepository.getSession().first()
+            binding.tvName.text = user.name
+            binding.tvEmail.text = user.email
+        }
+
         return view
     }
 }

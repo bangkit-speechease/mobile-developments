@@ -6,7 +6,8 @@
     <string name="progress">Progress</string>
     <string name="profile">Profile</string>
     <string name="name_practice">Practice Name</string>
-    <string name="welcome">Halo, Budi</string>
+    <!--<string name="welcome">Halo, Budi</string>-->
+    <string name="welcome">Halo, %1$s</string>
     <string name="name">$name</string>
     <string name="ayo_mulai_belajar">Ayo Mulai Belajar!</string>
     <string name="belajar_sambil_bermain">Belajar Sambil Bermain</string>
@@ -26,8 +27,8 @@
     <string name="nameSignup">Name</string>
 
     <string name="profile_photo">Profile Photo</string>
-    <string name="change_name">Ubah Nama</string>
-    <string name="change_email">Ubah Email</string>
+    <string name="profile_name">Nama</string>
+    <string name="profile_email">Email</string>
     <string name="change_password">Ubah Password</string>
     <string name="logout">Keluar</string>
     <string name="click">Tekan Tombol untuk Memulai</string>
@@ -38,5 +39,15 @@
     <string name="latihan_7_10_selesai">Latihan: 7/10 Selesai</string>
     <string name="star">star</string>
     <string name="vector">vector</string>
+
+    <string name="next">Next</string>
+    <string name="play_sound">Play</string>
+    <string name="image_description">Description</string>
+    <string name="image_description_one">Berapa Jumlah Kaki Beruang?</string>
+    <string name="image_description_two">Apa Warna Baju Anak Ini?</string>
+    <string name="image_description_three">Ada Berapa Banyak Bunga di Atas?</string>
+    <string name="image_description_four">Kucing Itu Sedang Makan Apa?</string>
+    <string name="image_description_five">Apa Nama Buah Ini?</string>
+
     <string name="kata">Kata</string>
 </resources>
