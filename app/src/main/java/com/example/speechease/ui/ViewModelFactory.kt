@@ -28,9 +28,7 @@ class ViewModelFactory(
             modelClass.isAssignableFrom(ProfileViewModel::class.java) -> {
                 ProfileViewModel(repository) as T
             }
-            // Menambahkan PracticeDetailViewModel
             modelClass.isAssignableFrom(PracticeDetailViewModel::class.java) -> {
-                //PracticeDetailViewModel(repository.provideApiService()) as T
                 Injection.providePracticeDetailViewModel(context) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)

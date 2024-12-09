@@ -7,6 +7,8 @@ data class AudioFeedbackResponse(
 )
 
 data class AudioFeedbackData(
-    val prediction_score: Double,
-    val predicted_label: String
+    val feedbackId: String,
+    val predictionScore: Double,
+    val predictedLabel: String,
+    val starScore: Int
 )

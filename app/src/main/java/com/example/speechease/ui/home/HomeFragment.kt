@@ -15,6 +15,7 @@ import com.example.speechease.di.Injection
 import com.example.speechease.ui.interactive.InteractiveActivity
 import com.example.speechease.ui.interactive.InteractiveOneActivity
 import com.example.speechease.ui.practicedetail.PracticeDetailActivity
+import com.example.speechease.ui.practice.PracticeActivity
 import com.example.speechease.ui.progress.ProgressFragment
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
@@ -63,7 +64,7 @@ class HomeFragment : Fragment() {
         }
 
         binding.cardLatihan.setOnClickListener {
-            val intent = Intent(requireContext(), PracticeDetailActivity::class.java)
+            val intent = Intent(requireContext(), PracticeActivity::class.java)
             startActivity(intent)
         }
 

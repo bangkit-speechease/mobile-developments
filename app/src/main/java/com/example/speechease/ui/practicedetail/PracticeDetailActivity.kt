@@ -1,30 +1,31 @@
 package com.example.speechease.ui.practicedetail
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.media.AudioFormat
 import android.media.AudioRecord
 import android.media.MediaRecorder
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 import com.example.speechease.R
-import com.example.speechease.data.pref.UserPreference
-import com.example.speechease.data.repository.UserRepository
-import com.example.speechease.data.retrofit.ApiConfig
-import com.example.speechease.data.retrofit.ApiService
 import com.example.speechease.databinding.ActivityPracticeDetailBinding
 import com.example.speechease.ui.ViewModelFactory
+import com.example.speechease.ui.feedback.FeedbackFalseActivity
+import com.example.speechease.ui.feedback.FeedbackTrueActivity
 import kotlinx.coroutines.launch
 import okhttp3.internal.and
 import java.io.FileOutputStream
 import java.io.IOException
 import kotlin.concurrent.thread
-
 
 class PracticeDetailActivity : AppCompatActivity() {
 
@@ -33,21 +34,6 @@ class PracticeDetailActivity : AppCompatActivity() {
     private lateinit var audioFile: String
 
     private var isRecording = false // Flag untuk status perekaman
-
-    // Inisialisasi UserPreference
-    private val userPreference: UserPreference by lazy {
-        UserPreference.getInstance(this)
-    }
-
-    // Inisialisasi ApiService
-    private val apiService: ApiService by lazy {
-        ApiConfig.getApiService(userPreference)
-    }
-
-    // Inisialisasi UserRepository
-    private val userRepository: UserRepository by lazy {
-        UserRepository.getInstance(this, apiService) // Diperbarui: Memberikan context dan apiService
-    }
 
     // Inisialisasi ViewModel dengan ViewModelFactory
     //private lateinit var viewModel: PracticeDetailViewModel
@@ -60,6 +46,13 @@ class PracticeDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityPracticeDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val contentId = intent.getStringExtra("CONTENT_ID")
+        Log.d("CONTENT_ID","$contentId")
+        viewModel.setContentId(contentId)
+        contentId?.let {
+            viewModel.fetchContentDetail(it)
+        }
 
         // Membuat Instance
         //viewModel = ViewModelProvider(this, ViewModelFactory.getInstance(this))[PracticeDetailViewModel::class.java]
@@ -82,6 +75,29 @@ class PracticeDetailActivity : AppCompatActivity() {
 
         viewModel.predictedLabel.observe(this) { label ->
             binding.tvDetection.text = label
+
+            if (label.isNotEmpty()) {
+                Handler(Looper.getMainLooper()).postDelayed({
+                    val intent = when (label) {
+                        "Bagus, Mari Lanjutkan" -> Intent(this, FeedbackTrueActivity::class.java)
+                        else -> Intent(this, FeedbackFalseActivity::class.java)
+                    }
+                    intent.putExtra("PREDICTED_LABEL", label) // Kirim label ke aktivitas berikutnya
+                    startActivity(intent)
+                    finish() // Tutup aktivitas saat ini
+                }, 3000) // Delay 3 detik
+            }
+        }
+
+        viewModel.contentDetail.observe(this) { contentDetail ->
+            if (contentDetail != null) {
+                binding.tvText.text = contentDetail.textPhrase
+                Glide.with(this)
+                    .load(contentDetail.imageUrl)
+                    .into(binding.imgPractice)
+            } else {
+                Log.e("PracticeDetailActivity", "Detail konten tidak ditemukan")
+            }
         }
     }
 

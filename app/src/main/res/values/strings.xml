@@ -39,6 +39,7 @@
     <string name="latihan_7_10_selesai">Latihan: 7/10 Selesai</string>
     <string name="star">star</string>
     <string name="vector">vector</string>
+
     <string name="next">Next</string>
     <string name="play_sound">Play</string>
     <string name="image_description">Description</string>
@@ -47,4 +48,6 @@
     <string name="image_description_three">Ada Berapa Banyak Bunga di Atas?</string>
     <string name="image_description_four">Kucing Itu Sedang Makan Apa?</string>
     <string name="image_description_five">Apa Nama Buah Ini?</string>
+
+    <string name="kata">Kata</string>
 </resources>
