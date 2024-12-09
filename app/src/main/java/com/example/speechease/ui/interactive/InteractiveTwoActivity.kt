@@ -5,13 +5,9 @@ import android.media.AudioAttributes
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.speechease.MainActivity
 import com.example.speechease.R
-import com.example.speechease.databinding.ActivityInteractiveOneBinding
 import com.example.speechease.databinding.ActivityInteractiveTwoBinding
 import java.io.IOException
 

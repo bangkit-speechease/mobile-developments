@@ -84,7 +84,6 @@ class PracticeDetailActivity : AppCompatActivity() {
                     }
                     intent.putExtra("PREDICTED_LABEL", label) // Kirim label ke aktivitas berikutnya
                     startActivity(intent)
-                    finish() // Tutup aktivitas saat ini
                 }, 3000) // Delay 3 detik
             }
         }

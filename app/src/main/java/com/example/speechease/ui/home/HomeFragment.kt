@@ -12,9 +12,7 @@ import com.example.speechease.MainActivity
 import com.example.speechease.R
 import com.example.speechease.databinding.FragmentHomeBinding
 import com.example.speechease.di.Injection
-import com.example.speechease.ui.interactive.InteractiveActivity
 import com.example.speechease.ui.interactive.InteractiveOneActivity
-import com.example.speechease.ui.practicedetail.PracticeDetailActivity
 import com.example.speechease.ui.practice.PracticeActivity
 import com.example.speechease.ui.progress.ProgressFragment
 import kotlinx.coroutines.flow.first
