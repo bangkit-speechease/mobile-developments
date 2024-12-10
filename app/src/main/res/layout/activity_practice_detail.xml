@@ -51,9 +51,9 @@
             app:tint="@color/white"
             app:layout_constraintBottom_toBottomOf="@+id/tv_text"
             app:layout_constraintEnd_toStartOf="@+id/tv_text"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tv_text" />
+            app:layout_constraintTop_toTopOf="@+id/tv_text"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/tv_text"
@@ -61,11 +61,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="@string/kata"
-            android:textSize="22sp"
+            android:textSize="20sp"
             android:textStyle="bold"
+            android:fontFamily="@font/poppinsmedium"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/btn_play"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -92,6 +92,7 @@
         android:layout_marginTop="8dp"
         android:textStyle="bold"
         android:text="@string/click"
+        android:fontFamily="@font/poppinsmedium"
         app:layout_constraintEnd_toEndOf="@+id/btn_mic"
         app:layout_constraintStart_toStartOf="@+id/btn_mic"
         app:layout_constraintTop_toBottomOf="@+id/btn_mic" />
