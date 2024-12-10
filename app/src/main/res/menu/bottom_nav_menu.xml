@@ -2,18 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/nav_home"
-        android:icon="@drawable/baseline_home_24"
+        android:icon="@drawable/ic_baseline_home_24"
         android:title="@string/home" />
     <item
         android:id="@+id/nav_guide"
-        android:icon="@drawable/baseline_menu_book_24"
+        android:icon="@drawable/ic_baseline_menu_book_24"
         android:title="@string/guide" />
     <item
         android:id="@+id/nav_progress"
-        android:icon="@drawable/baseline_access_time_24"
+        android:icon="@drawable/ic_baseline_access_time_24"
         android:title="@string/progress" />
     <item
         android:id="@+id/nav_profile"
-        android:icon="@drawable/baseline_person_24"
+        android:icon="@drawable/ic_baseline_person_24"
         android:title="@string/profile" />
 </menu>

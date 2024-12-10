@@ -32,13 +32,13 @@ class InteractiveFiveActivity : AppCompatActivity() {
                     // None
                 } else {
                     mediaPlayer?.start()
-                    binding.btnPlay.setIconResource(R.drawable.baseline_stop_24)
+                    binding.btnPlay.setIconResource(R.drawable.ic_baseline_stop_24)
                 }
             }
         }
 
         mediaPlayer?.setOnCompletionListener {
-            binding.btnPlay.setIconResource(R.drawable.baseline_play_arrow_24)
+            binding.btnPlay.setIconResource(R.drawable.ic_baseline_play_arrow_24)
         }
 
         binding.btnExit.setOnClickListener {
@@ -78,7 +78,7 @@ class InteractiveFiveActivity : AppCompatActivity() {
         mediaPlayer?.setOnPreparedListener {
             isReady = true
             mediaPlayer?.start()
-            binding.btnPlay.setIconResource(R.drawable.baseline_stop_24)
+            binding.btnPlay.setIconResource(R.drawable.ic_baseline_stop_24)
         }
         mediaPlayer?.setOnErrorListener { _, what, extra ->
             Log.e("MediaPlayerError", "Error code: $what, Extra: $extra")

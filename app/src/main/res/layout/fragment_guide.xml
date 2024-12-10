@@ -12,27 +12,27 @@
         tools:context=".ui.guide.GuideFragment">
 
         <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="-16dp"
-            android:src="@drawable/logo_app_kecil"
+            android:id="@+id/iv_guide"
+            android:layout_width="250dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="32dp"
+            android:src="@drawable/speechease"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ContentDescription" />
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/tv_guide"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Perhatikan Tutorial Ini Ya"
             android:textSize="18sp"
             android:textStyle="bold"
             android:fontFamily="@font/poppinsmedium"
-            app:layout_constraintEnd_toEndOf="@+id/imageView3"
-            app:layout_constraintStart_toStartOf="@+id/imageView3"
-            app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+            app:layout_constraintEnd_toEndOf="@+id/iv_guide"
+            app:layout_constraintStart_toStartOf="@+id/iv_guide"
+            app:layout_constraintTop_toBottomOf="@+id/iv_guide" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/materialCardView"
@@ -44,7 +44,7 @@
             app:cardElevation="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView6">
+            app:layout_constraintTop_toBottomOf="@+id/tv_guide">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

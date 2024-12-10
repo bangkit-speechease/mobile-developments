@@ -138,12 +138,12 @@ class PracticeDetailActivity : AppCompatActivity() {
                     mediaPlayer?.setDataSource(state.audioUrl)
                     mediaPlayer?.setOnPreparedListener {
                         isPlaying = false
-                        binding.btnPlay.setImageResource(R.drawable.baseline_play_arrow_24)
+                        binding.btnPlay.setImageResource(R.drawable.ic_baseline_play_arrow_24)
                         binding.btnPlay.isEnabled = true
                     }
                     mediaPlayer?.setOnCompletionListener {
                         isPlaying = false
-                        binding.btnPlay.setImageResource(R.drawable.baseline_play_arrow_24)
+                        binding.btnPlay.setImageResource(R.drawable.ic_baseline_play_arrow_24)
                     }
                     mediaPlayer?.prepareAsync()
                 }
@@ -160,7 +160,7 @@ class PracticeDetailActivity : AppCompatActivity() {
         if (mediaPlayer?.isPlaying == false) {
             mediaPlayer?.start()
             isPlaying = true
-            binding.btnPlay.setImageResource(R.drawable.baseline_stop_24)
+            binding.btnPlay.setImageResource(R.drawable.ic_baseline_stop_24)
         }
     }
 
@@ -168,7 +168,7 @@ class PracticeDetailActivity : AppCompatActivity() {
         mediaPlayer?.stop()
         mediaPlayer?.reset()
         isPlaying = false
-        binding.btnPlay.setImageResource(R.drawable.baseline_play_arrow_24)
+        binding.btnPlay.setImageResource(R.drawable.ic_baseline_play_arrow_24)
     }
 
     override fun onRequestPermissionsResult(
@@ -224,7 +224,7 @@ class PracticeDetailActivity : AppCompatActivity() {
             audioRecord.startRecording()
             isRecording = true
 
-            binding.btnMic.setIconResource(R.drawable.baseline_stop_24)
+            binding.btnMic.setIconResource(R.drawable.ic_baseline_stop_24)
             Toast.makeText(this, "Merekam suara...", Toast.LENGTH_SHORT).show()
 
             // Mulai thread untuk menulis data audio ke file WAV
@@ -247,7 +247,7 @@ class PracticeDetailActivity : AppCompatActivity() {
             }
 
             // Ubah ikon tombol kembali ke mic
-            binding.btnMic.setIconResource(R.drawable.baseline_mic_24)
+            binding.btnMic.setIconResource(R.drawable.ic_baseline_mic_24)
 
             Toast.makeText(this, "Perekaman selesai.", Toast.LENGTH_SHORT).show()
 

@@ -8,9 +8,9 @@
 
     <ImageView
         android:id="@+id/iv_mic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/logo_app_sedang"
+        android:layout_width="280dp"
+        android:layout_height="180dp"
+        android:src="@drawable/speechease"
         app:layout_constraintBottom_toTopOf="@+id/tv_description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
