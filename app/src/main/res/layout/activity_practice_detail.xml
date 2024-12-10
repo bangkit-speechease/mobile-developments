@@ -32,34 +32,44 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_text"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/text_play_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:text="@string/kata"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/img_practice"
-        app:layout_constraintHorizontal_bias="0.068"
-        app:layout_constraintStart_toEndOf="@+id/btn_play"
-        app:layout_constraintTop_toBottomOf="@+id/img_practice" />
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_practice">
 
-    <ImageButton
-        android:id="@+id/btn_play"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="90dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/circle_button"
-        android:padding="8dp"
-        android:src="@drawable/baseline_play_arrow_24"
-        app:tint="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_text"
-        app:layout_constraintStart_toStartOf="@+id/img_practice"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintTop_toTopOf="@+id/tv_text" />
+        <ImageButton
+            android:id="@+id/btn_play"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/circle_button"
+            android:padding="8dp"
+            android:src="@drawable/baseline_play_arrow_24"
+            app:tint="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_text"
+            app:layout_constraintEnd_toStartOf="@+id/tv_text"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_text" />
+
+        <TextView
+            android:id="@+id/tv_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/kata"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btn_play"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_mic"

@@ -15,11 +15,6 @@ class FeedbackFalseActivity : AppCompatActivity() {
         binding = ActivityFeedbackFalseBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.btnRetry.setOnClickListener {
-            Intent(this, PracticeDetailActivity::class.java)
-            finish()
-        }
-
         binding.btnExit.setOnClickListener {
             val intent = Intent(this, PracticeActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
