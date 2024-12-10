@@ -11,6 +11,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -105,14 +106,22 @@ class PracticeDetailActivity : AppCompatActivity() {
             }
         }
 
-        viewModel.contentDetail.observe(this) { contentDetail ->
-            if (contentDetail != null) {
-                binding.tvText.text = contentDetail.textPhrase
-                Glide.with(this)
-                    .load(contentDetail.imageUrl)
-                    .into(binding.imgPractice)
-            } else {
-                Log.e("PracticeDetailActivity", "Detail konten tidak ditemukan")
+        viewModel.contentDetailState.observe(this) { state ->
+            when (state) {
+                is ContentDetailState.Loading -> {
+                    binding.progressBar.visibility = View.VISIBLE
+                }
+                is ContentDetailState.Success -> {
+                    binding.progressBar.visibility = View.GONE
+                    binding.tvText.text = state.contentDetail.textPhrase
+                    Glide.with(this)
+                        .load(state.contentDetail.imageUrl)
+                        .into(binding.imgPractice)
+                }
+                is ContentDetailState.Error -> {
+                    binding.progressBar.visibility = View.GONE
+                    Log.e("PracticeDetailActivity", "Detail konten tidak ditemukan: ${state.message}")
+                }
             }
         }
 
@@ -120,9 +129,11 @@ class PracticeDetailActivity : AppCompatActivity() {
             when (state) {
                 is AudioUrlState.Loading -> {
                     binding.btnPlay.isEnabled = false
+                    binding.progressBar.visibility = View.VISIBLE
                 }
                 is AudioUrlState.Success -> {
                     binding.btnPlay.isEnabled = true
+                    binding.progressBar.visibility = View.GONE
                     mediaPlayer?.reset()
                     mediaPlayer?.setDataSource(state.audioUrl)
                     mediaPlayer?.setOnPreparedListener {
@@ -138,6 +149,7 @@ class PracticeDetailActivity : AppCompatActivity() {
                 }
                 is AudioUrlState.Error -> {
                     binding.btnPlay.isEnabled = false
+                    binding.progressBar.visibility = View.GONE
                     Toast.makeText(this, state.message, Toast.LENGTH_SHORT).show()
                 }
             }

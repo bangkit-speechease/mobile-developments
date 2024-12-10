@@ -29,8 +29,8 @@ class PracticeDetailViewModel(
     private val _contentId = MutableLiveData<String?>()
     private val contentId: LiveData<String?> get() = _contentId
 
-    private val _contentDetail = MutableLiveData<ContentData?>()
-    val contentDetail: LiveData<ContentData?> get() = _contentDetail
+    private val _contentDetailState = MutableLiveData<ContentDetailState>()
+    val contentDetailState: LiveData<ContentDetailState> = _contentDetailState
 
     private val _audioUrlState = MutableLiveData<AudioUrlState>(AudioUrlState.Loading)
     val audioUrlState: LiveData<AudioUrlState> get() = _audioUrlState
@@ -42,6 +42,7 @@ class PracticeDetailViewModel(
 
     fun fetchContentDetail(contentId: String) {
         _audioUrlState.value = AudioUrlState.Loading
+        _contentDetailState.value = ContentDetailState.Loading
         viewModelScope.launch {
             try {
                 val response = contentRepository.getContentDetails(contentId)
@@ -49,16 +50,18 @@ class PracticeDetailViewModel(
                     val detailData = response.body()?.data?.firstOrNull()
                     if (detailData != null && detailData.audioGuideUrl != null) {
                         _audioUrlState.value = AudioUrlState.Success(detailData.audioGuideUrl)
-                        _contentDetail.value = detailData
+                        _contentDetailState.value = ContentDetailState.Success(detailData)
                     } else {
                         _audioUrlState.value = AudioUrlState.Error("URL audio tidak tersedia")
+                        _contentDetailState.value = ContentDetailState.Error("URL audio tidak tersedia")
                     }
                 } else {
-                    _audioUrlState.value =
-                        AudioUrlState.Error("Gagal mengambil data: ${response.message()}")
+                    _audioUrlState.value = AudioUrlState.Error("Gagal mengambil data: ${response.message()}")
+                    _contentDetailState.value = ContentDetailState.Error("Gagal mengambil data: ${response.message()}")
                 }
             } catch (e: Exception) {
                 _audioUrlState.value = AudioUrlState.Error("Error: ${e.message}")
+                _contentDetailState.value = ContentDetailState.Error("Error: ${e.message}")
             }
         }
     }

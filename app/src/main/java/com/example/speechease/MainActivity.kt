@@ -39,14 +39,14 @@ class MainActivity : AppCompatActivity() {
             Log.d("MainActivity", "User session: $user")
 
             if (savedInstanceState == null) {
-                loadFragment(GuideFragment())
+                loadFragment(HomeFragment())
             }
         }
 
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.nav_guide -> loadFragment(GuideFragment())
                 R.id.nav_home -> loadFragment(HomeFragment())
+                R.id.nav_guide -> loadFragment(GuideFragment())
                 R.id.nav_progress -> loadFragment(ProgressFragment())
                 R.id.nav_profile -> loadFragment(ProfileFragment())
             }

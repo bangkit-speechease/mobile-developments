@@ -69,5 +69,6 @@
         2. Lihat gambar dan dengarkan pertanyaannya \n\t\t\tdengan menekan <b>tombol Play</b>.\n
         3. <b>Jawab pertanyaan</b>, lalu tekan <b>tombol Next</b> \n\t\t\tuntuk lanjut ke soal berikutnya!
     </string>
+    <string name="exit">Exit</string>
 
 </resources>

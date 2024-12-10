@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
+import com.example.speechease.MainActivity
 import com.example.speechease.R
 import com.example.speechease.databinding.ActivityInteractiveFiveBinding
 import java.io.IOException
@@ -38,6 +39,11 @@ class InteractiveFiveActivity : AppCompatActivity() {
 
         mediaPlayer?.setOnCompletionListener {
             binding.btnPlay.setIconResource(R.drawable.baseline_play_arrow_24)
+        }
+
+        binding.btnExit.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
 
         binding.backButton.setOnClickListener {
