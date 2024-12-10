@@ -44,6 +44,7 @@ class InteractiveFiveActivity : AppCompatActivity() {
         binding.btnExit.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+            finishAffinity()
         }
 
         binding.backButton.setOnClickListener {

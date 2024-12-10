@@ -70,5 +70,6 @@
         3. <b>Jawab pertanyaan</b>, lalu tekan <b>tombol Next</b> \n\t\t\tuntuk lanjut ke soal berikutnya!
     </string>
     <string name="exit">Exit</string>
+    <string name="maintenance">Maintenance</string>
 
 </resources>
