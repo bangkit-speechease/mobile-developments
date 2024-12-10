@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.speechease.data.pref.UserPreference
 import com.example.speechease.data.repository.ContentRepository
-import com.example.speechease.data.response.ContentData
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -48,7 +47,7 @@ class PracticeDetailViewModel(
                 val response = contentRepository.getContentDetails(contentId)
                 if (response.isSuccessful && response.body() != null) {
                     val detailData = response.body()?.data?.firstOrNull()
-                    if (detailData != null && detailData.audioGuideUrl != null) {
+                    if (detailData != null) {
                         _audioUrlState.value = AudioUrlState.Success(detailData.audioGuideUrl)
                         _contentDetailState.value = ContentDetailState.Success(detailData)
                     } else {

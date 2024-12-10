@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.speechease.databinding.ActivityFeedbackFalseBinding
 import com.example.speechease.ui.practice.PracticeActivity
-import com.example.speechease.ui.practicedetail.PracticeDetailActivity
 
 class FeedbackFalseActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFeedbackFalseBinding

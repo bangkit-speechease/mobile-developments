@@ -1,6 +1,7 @@
 package com.example.speechease.ui.practicedetail
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.media.AudioFormat
@@ -41,7 +42,6 @@ class PracticeDetailActivity : AppCompatActivity() {
     private var isRecording = false // Flag untuk status perekaman
 
     // Inisialisasi ViewModel dengan ViewModelFactory
-    //private lateinit var viewModel: PracticeDetailViewModel
     private val viewModel: PracticeDetailViewModel by viewModels {
         ViewModelFactory.getInstance(this)
     }
@@ -186,7 +186,7 @@ class PracticeDetailActivity : AppCompatActivity() {
         }
     }
 
-
+    @SuppressLint("SetTextI18n")
     private fun startRecording() {
         try {
             // Ubah ekstensi file ke .wav
@@ -224,6 +224,8 @@ class PracticeDetailActivity : AppCompatActivity() {
             audioRecord.startRecording()
             isRecording = true
 
+            binding.tvDetection.text = "Tekan Tombol untuk Berhenti"
+
             binding.btnMic.setIconResource(R.drawable.ic_baseline_stop_24)
             Toast.makeText(this, "Merekam suara...", Toast.LENGTH_SHORT).show()
 
@@ -238,6 +240,7 @@ class PracticeDetailActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun stopRecording() {
         try {
             if (::audioRecord.isInitialized) {
@@ -245,6 +248,8 @@ class PracticeDetailActivity : AppCompatActivity() {
                 audioRecord.stop()
                 audioRecord.release()
             }
+
+            binding.tvDetection.text = "Tunggu Sebentar"
 
             // Ubah ikon tombol kembali ke mic
             binding.btnMic.setIconResource(R.drawable.ic_baseline_mic_24)
@@ -262,7 +267,7 @@ class PracticeDetailActivity : AppCompatActivity() {
     }
 
     private fun writeAudioDataToFile(path: String) {
-        val sData = ShortArray(BufferElements2Rec)
+        val sData = ShortArray(BUFFER_ELEMENTS_2REC)
         var os: FileOutputStream? = null
         try {
             os = FileOutputStream(path)
@@ -279,7 +284,7 @@ class PracticeDetailActivity : AppCompatActivity() {
 
         while (isRecording) {
             // Membaca data dari mikrofon ke array sData
-            audioRecord.read(sData, 0, BufferElements2Rec)
+            audioRecord.read(sData, 0, BUFFER_ELEMENTS_2REC)
             try {
                 val bData = short2byte(sData)
                 for (byte in bData) {
@@ -399,6 +404,6 @@ class PracticeDetailActivity : AppCompatActivity() {
         private const val BITS_PER_SAMPLE = 16
         private const val NUMBER_CHANNELS = 1
         private const val BYTE_RATE = RECORDER_SAMPLE_RATE * BITS_PER_SAMPLE * NUMBER_CHANNELS / 8
-        private const val BufferElements2Rec = 2048 // Number of short elements to read at a time
+        private const val BUFFER_ELEMENTS_2REC = 2048 // Number of short elements to read at a time
     }
 }
