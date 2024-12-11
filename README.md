@@ -1,22 +1,9 @@
 # SpeechEase
-
 Capstone Project for Childern with Speech Delay.
 
-
-## Member
-
-|ID|Name|Universitas|Linkedin|
-|:-:|:-:|:-:|:-:|
-|M008B4KY4244|Syah Ridho Natiqoh|Universitas Gadjah Mada|[Linkedin](linkedin.com/in)|
-|M283B4KX3509|Puan Bening Pastika|Universitas Negeri Semarang|[Linkedin](linkedin.com/in/puanbeningpastika/)|
-|M297B4KX1603|Gertrud Irish Jovincia|Universitas Pembangunan Nasional Veteran Yogyakarta|[Linkedin](linkedin.com/in)|
-|C102B4KY2027|Ivander Kendrick Wijono|Institut Bisnis dan Informatika Kwik Kian Gie|[Linkedin](linkedin.com/in)|
-|C102B4KY4487|William Susilo|Institut Bisnis dan Informatika Kwik Kian Gie|[Linkedin](linkedin.com/in)|
-|A283B4KY1349|Fahreza Ananda Kusuma|Universitas Negeri Semarang|[Linkedin](linkedin.com/in/fahreza-ananda-kusuma/)|
-|A134B4KX3179|Nabila|Politeknik Negeri Sriwijaya|[Linkedin](linkedin.com/in/nabila-229121289/)|
-
+## Our Description
+Developed an Android application using Kotlin in Android Studio specifically designed to support the learning process of children with speech delays. In the development, we applied the MVVM (Model-View-ViewModel) architecture based approach to ensure a clear separation between presentation logic, data, and UI, making the application more structured, manageable, and scalable. The app also utilizes Retrofit for API communication, including integration with machine learning, and supports features such as login, registration, and content access efficiently. To create a user-friendly interface, we used Figma as a prototyping tool, so that the app design can be easily understood by children and visually engaging. The interactive and engaging features, such as the voice recorder, visual guidance, and feedback, are designed to assist speech therapy, with the objective of providing a fun yet effective learning experience for children.
 
 ## Features
-
 - Practice
 - Voice Detection
