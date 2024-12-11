@@ -24,7 +24,6 @@ class SplashScreenActivity : AppCompatActivity() {
         binding = ActivitySplashScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Memuat animasi zoom-in
         val zoomInAnimation = AnimationUtils.loadAnimation(this, R.anim.zoom_in)
         binding.logoImageView.startAnimation(zoomInAnimation)
 
@@ -34,7 +33,6 @@ class SplashScreenActivity : AppCompatActivity() {
             val user: UserModel = userRepository.getUser().first()
 
             if (user.isLogin && user.token.isNotEmpty()) {
-                // Langsung menuju MainActivity jika sudah login
                 Handler(Looper.getMainLooper()).postDelayed({
                     val intent = Intent(this@SplashScreenActivity, MainActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
@@ -42,7 +40,6 @@ class SplashScreenActivity : AppCompatActivity() {
                     finish()
                 }, 2000)
             } else {
-                // Lanjutkan ke WelcomeActivity setelah delay jika belum login
                 Handler(Looper.getMainLooper()).postDelayed({
                     val intent = Intent(this@SplashScreenActivity, WelcomeActivity::class.java)
                     startActivity(intent)

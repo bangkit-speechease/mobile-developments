@@ -50,13 +50,13 @@ class SignupActivity : AppCompatActivity() {
                     if (!response.error) {
                         Toast.makeText(
                             this@SignupActivity,
-                            "Register berhasil!",
+                            "Daftar berhasil!",
                             Toast.LENGTH_SHORT
                         ).show()
 
                         AlertDialog.Builder(this@SignupActivity).apply {
                             setTitle("Yeah!")
-                            setMessage("Akun dengan $email sudah jadi nih. Jangan lupa untuk Verifikasi Email Anda!")
+                            setMessage("Akun dengan email $email sudah jadi nih.")
                             setPositiveButton("Lanjut") { _, _ ->
                                 startActivity(
                                     Intent(
@@ -70,10 +70,9 @@ class SignupActivity : AppCompatActivity() {
                             show()
                         }
                     } else {
-                        // Registration failed
                         Toast.makeText(
                             this@SignupActivity,
-                            "Register gagal: ${response.message}",
+                            "Daftar gagal: ${response.message}",
                             Toast.LENGTH_SHORT
                         ).show()
                     }
@@ -83,14 +82,14 @@ class SignupActivity : AppCompatActivity() {
                     val errorMessage = errorResponse.message
                     Toast.makeText(
                         this@SignupActivity,
-                        "Register gagal: $errorMessage",
+                        "Daftar gagal: $errorMessage",
                         Toast.LENGTH_SHORT
                     ).show()
                 } catch (e: Exception) {
-                    Log.e("SignupActivity", "Error saat register", e)
+                    Log.e("SignupActivity", "Error saat daftar", e)
                     Toast.makeText(
                         this@SignupActivity,
-                        "Terjadi error saat register",
+                        "Terjadi error saat daftar",
                         Toast.LENGTH_SHORT
                     ).show()
                 } finally {

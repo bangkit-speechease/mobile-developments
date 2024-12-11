@@ -39,13 +39,11 @@ class PracticeDetailActivity : AppCompatActivity() {
     private var mediaPlayer: MediaPlayer? = null
     private var isPlaying = false
 
-    private var isRecording = false // Flag untuk status perekaman
+    private var isRecording = false
 
-    // Inisialisasi ViewModel dengan ViewModelFactory
     private val viewModel: PracticeDetailViewModel by viewModels {
         ViewModelFactory.getInstance(this)
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -100,9 +98,9 @@ class PracticeDetailActivity : AppCompatActivity() {
                         "Bagus, Mari Lanjutkan" -> Intent(this, FeedbackTrueActivity::class.java)
                         else -> Intent(this, FeedbackFalseActivity::class.java)
                     }
-                    intent.putExtra("PREDICTED_LABEL", label) // Kirim label ke aktivitas berikutnya
+                    intent.putExtra("PREDICTED_LABEL", label)
                     startActivity(intent)
-                }, 3000) // Delay 3 detik
+                }, 3000)
             }
         }
 
@@ -189,7 +187,6 @@ class PracticeDetailActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     private fun startRecording() {
         try {
-            // Ubah ekstensi file ke .wav
             audioFile = "${cacheDir.absolutePath}/audio_${System.currentTimeMillis()}.wav"
 
             val bufferSize = AudioRecord.getMinBufferSize(
@@ -229,7 +226,6 @@ class PracticeDetailActivity : AppCompatActivity() {
             binding.btnMic.setIconResource(R.drawable.ic_baseline_stop_24)
             Toast.makeText(this, "Merekam suara...", Toast.LENGTH_SHORT).show()
 
-            // Mulai thread untuk menulis data audio ke file WAV
             thread(true) {
                 writeAudioDataToFile(audioFile)
             }
@@ -251,12 +247,10 @@ class PracticeDetailActivity : AppCompatActivity() {
 
             binding.tvDetection.text = "Tunggu Sebentar"
 
-            // Ubah ikon tombol kembali ke mic
             binding.btnMic.setIconResource(R.drawable.ic_baseline_mic_24)
 
             Toast.makeText(this, "Perekaman selesai.", Toast.LENGTH_SHORT).show()
 
-            // Kirim audio ke ViewModel untuk diunggah dalam coroutine
             lifecycleScope.launch {
                 viewModel.uploadAudio(audioFile)
             }
@@ -277,13 +271,11 @@ class PracticeDetailActivity : AppCompatActivity() {
 
         val data = arrayListOf<Byte>()
 
-        // Menambahkan header WAV
         for (byte in wavFileHeader()) {
             data.add(byte)
         }
 
         while (isRecording) {
-            // Membaca data dari mikrofon ke array sData
             audioRecord.read(sData, 0, BUFFER_ELEMENTS_2REC)
             try {
                 val bData = short2byte(sData)
@@ -321,12 +313,12 @@ class PracticeDetailActivity : AppCompatActivity() {
         val headerSize = 44
         val header = ByteArray(headerSize)
 
-        header[0] = 'R'.code.toByte() // RIFF/WAVE header
+        header[0] = 'R'.code.toByte()
         header[1] = 'I'.code.toByte()
         header[2] = 'F'.code.toByte()
         header[3] = 'F'.code.toByte()
 
-        header[4] = (0 and 0xff).toByte() // Size of the overall file, 0 because unknown
+        header[4] = (0 and 0xff).toByte()
         header[5] = (0 shr 8 and 0xff).toByte()
         header[6] = (0 shr 16 and 0xff).toByte()
         header[7] = (0 shr 24 and 0xff).toByte()
@@ -336,36 +328,36 @@ class PracticeDetailActivity : AppCompatActivity() {
         header[10] = 'V'.code.toByte()
         header[11] = 'E'.code.toByte()
 
-        header[12] = 'f'.code.toByte() // 'fmt ' chunk
+        header[12] = 'f'.code.toByte()
         header[13] = 'm'.code.toByte()
         header[14] = 't'.code.toByte()
         header[15] = ' '.code.toByte()
 
-        header[16] = 16 // Length of format data
+        header[16] = 16
         header[17] = 0
         header[18] = 0
         header[19] = 0
 
-        header[20] = 1 // Type of format (1 is PCM)
+        header[20] = 1
         header[21] = 0
 
         header[22] = NUMBER_CHANNELS.toByte()
         header[23] = 0
 
-        header[24] = (RECORDER_SAMPLE_RATE and 0xff).toByte() // Sampling rate
+        header[24] = (RECORDER_SAMPLE_RATE and 0xff).toByte()
         header[25] = (RECORDER_SAMPLE_RATE shr 8 and 0xff).toByte()
         header[26] = (RECORDER_SAMPLE_RATE shr 16 and 0xff).toByte()
         header[27] = (RECORDER_SAMPLE_RATE shr 24 and 0xff).toByte()
 
-        header[28] = (BYTE_RATE and 0xff).toByte() // Byte rate = (Sample Rate * BitsPerSample * Channels) / 8
+        header[28] = (BYTE_RATE and 0xff).toByte()
         header[29] = (BYTE_RATE shr 8 and 0xff).toByte()
         header[30] = (BYTE_RATE shr 16 and 0xff).toByte()
         header[31] = (BYTE_RATE shr 24 and 0xff).toByte()
 
-        header[32] = (NUMBER_CHANNELS * BITS_PER_SAMPLE / 8).toByte() // Block align
+        header[32] = (NUMBER_CHANNELS * BITS_PER_SAMPLE / 8).toByte()
         header[33] = 0
 
-        header[34] = BITS_PER_SAMPLE.toByte() // Bits per sample
+        header[34] = BITS_PER_SAMPLE.toByte()
         header[35] = 0
 
         header[36] = 'd'.code.toByte()
@@ -373,7 +365,7 @@ class PracticeDetailActivity : AppCompatActivity() {
         header[38] = 't'.code.toByte()
         header[39] = 'a'.code.toByte()
 
-        header[40] = (0 and 0xff).toByte() // Size of the data section
+        header[40] = (0 and 0xff).toByte()
         header[41] = (0 shr 8 and 0xff).toByte()
         header[42] = (0 shr 16 and 0xff).toByte()
         header[43] = (0 shr 24 and 0xff).toByte()
@@ -385,12 +377,12 @@ class PracticeDetailActivity : AppCompatActivity() {
         val fileSize = data.size
         val contentSize = fileSize - 44
 
-        data[4] = (fileSize and 0xff).toByte() // Size of the overall file
+        data[4] = (fileSize and 0xff).toByte()
         data[5] = (fileSize shr 8 and 0xff).toByte()
         data[6] = (fileSize shr 16 and 0xff).toByte()
         data[7] = (fileSize shr 24 and 0xff).toByte()
 
-        data[40] = (contentSize and 0xff).toByte() // Size of the data section
+        data[40] = (contentSize and 0xff).toByte()
         data[41] = (contentSize shr 8 and 0xff).toByte()
         data[42] = (contentSize shr 16 and 0xff).toByte()
         data[43] = (contentSize shr 24 and 0xff).toByte()
@@ -398,12 +390,12 @@ class PracticeDetailActivity : AppCompatActivity() {
 
     companion object {
         private const val REQUEST_MIC_PERMISSION = 1
-        private const val RECORDER_SAMPLE_RATE = 16000 // Sampling rate (Hz)
-        private const val RECORDER_CHANNELS = AudioFormat.CHANNEL_IN_MONO // Audio channel configuration
-        private const val RECORDER_AUDIO_ENCODING = AudioFormat.ENCODING_PCM_16BIT // Audio encoding format
+        private const val RECORDER_SAMPLE_RATE = 16000
+        private const val RECORDER_CHANNELS = AudioFormat.CHANNEL_IN_MONO
+        private const val RECORDER_AUDIO_ENCODING = AudioFormat.ENCODING_PCM_16BIT
         private const val BITS_PER_SAMPLE = 16
         private const val NUMBER_CHANNELS = 1
         private const val BYTE_RATE = RECORDER_SAMPLE_RATE * BITS_PER_SAMPLE * NUMBER_CHANNELS / 8
-        private const val BUFFER_ELEMENTS_2REC = 2048 // Number of short elements to read at a time
+        private const val BUFFER_ELEMENTS_2REC = 2048
     }
 }

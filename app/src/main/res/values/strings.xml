@@ -1,12 +1,12 @@
 <resources>
     <string name="app_name">SpeechEase</string>
-    <string name="guide">Guide</string>
-    <string name="home">Home</string>
-    <string name="interactive">Interactive</string>
-    <string name="practice">Practice</string>
-    <string name="progress">Progress</string>
-    <string name="profile">Profile</string>
-    <string name="name_practice">Practice Name</string>
+    <string name="guide">Panduan</string>
+    <string name="home">Beranda</string>
+    <string name="interactive">Interaktif</string>
+    <string name="practice">Latihan</string>
+    <string name="progress">Kemajuan</string>
+    <string name="profile">Profil</string>
+    <string name="name_practice">Nama Latihan</string>
     <string name="welcome">Halo, %1$s</string>
     <string name="name">$name</string>
     <string name="ayo_mulai_belajar">Ayo Mulai Belajar!</string>
@@ -18,31 +18,31 @@
     <string name="message_login_page">Masukkan dulu datamu ya</string>
     <string name="title_login_page">Sudah siap untuk belajar?</string>
     <string name="email">Email</string>
-    <string name="password">Password</string>
-    <string name="password_error">Password tidak boleh kurang dari 6 karakter</string>
+    <string name="password">Kata Sandi</string>
+    <string name="password_error">Kata Sandi tidak boleh kurang dari 6 karakter</string>
     <string name="email_error">Alamat Email Tidak Valid</string>
     <string name="signup">Daftar</string>
     <string name="login">Masuk</string>
     <string name="title_signup_page">Lengkapi data dirimu di bawah ini ya</string>
-    <string name="nameSignup">Name</string>
+    <string name="nameSignup">Nama</string>
 
-    <string name="profile_photo">Profile Photo</string>
+    <string name="profile_photo">Foto Profil</string>
     <string name="profile_name">Nama</string>
     <string name="profile_email">Email</string>
-    <string name="change_password">Ubah Password</string>
+    <string name="change_password">Ubah Kata Sandi</string>
     <string name="logout">Keluar</string>
     <string name="click">Tekan Tombol untuk Memulai</string>
 
-    <string name="speech_detection">Speech, Detection</string>
-    <string name="image_action">Image, Action</string>
+    <string name="speech_detection">Suara, Deteksi</string>
+    <string name="image_action">Gambar, Aktif</string>
     <string name="selamat_datang">Selamat Datang</string>
     <string name="latihan_selesai">Latihan: 0/60 Selesai</string>
     <string name="star">star</string>
     <string name="vector">vector</string>
 
-    <string name="next">Next</string>
-    <string name="play_sound">Play</string>
-    <string name="image_description">Description</string>
+    <string name="next">Selanjutnya</string>
+    <string name="play_sound">Putar</string>
+    <string name="image_description">Deskripsi</string>
     <string name="image_description_one">Berapa Jumlah Kaki Beruang?</string>
     <string name="image_description_two">Apa Warna Baju Anak Ini?</string>
     <string name="image_description_three">Ada Berapa Banyak Bunga di Atas?</string>
@@ -50,26 +50,26 @@
     <string name="image_description_five">Apa Nama Buah Ini?</string>
 
     <string name="kata">Kata</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string name="practice_guide_title">Cara Menggunakan Fitur Practice</string>
+    <string name="guide_title">Perhatikan Panduan Ini Ya</string>
+
+    <string name="practice_guide_title">Cara Menggunakan Fitur Latihan</string>
     <string name="practice_guide_content">
         \n
-        1. Tekan <b>Practice</b> di halaman <b>Home</b>.\n
+        1. Tekan <b>Latihan</b> di halaman <b>Beranda</b>.\n
         2. <b>Pilih latihan</b> yang ingin kamu coba!\n
-        3. Ikuti panduan gambar dan kata, lalu <b>tekan \n\t\t\ttombol Rekam</b> untuk mengucapkannya.\n
-        4. Dapatkan <b>Feedback</b>, apakah pelafalan kamu \n\t\t\tsudah benar atau coba lagi!
+        3. Ikuti panduan gambar dan kata, lalu tekan <b>\n\t\t\ttombol Rekam</b> untuk mengucapkannya.\n
+        4. Dapatkan <b>Umpan Balik</b>, apakah pelafalan \n\t\t\tkamu sudah benar atau coba lagi!
     </string>
 
-    <string name="interactive_guide_title">Cara Menggunakan Fitur Interactive</string>
+    <string name="interactive_guide_title">Cara Menggunakan Fitur Interaktif</string>
     <string name="interactive_guide_content">
         \n
-        1. Tekan <b>Interactive</b> di halaman <b>Home</b>.\n
-        2. Lihat gambar dan dengarkan pertanyaannya \n\t\t\tdengan menekan <b>tombol Play</b>.\n
-        3. <b>Jawab pertanyaan</b>, lalu tekan <b>tombol Next</b> \n\t\t\tuntuk lanjut ke soal berikutnya!
+        1. Tekan <b>Interaktif</b> di halaman <b>Beranda</b>.\n
+        2. Lihat gambar dan dengarkan pertanyaannya \n\t\t\tdengan menekan <b>tombol Putar Suara</b>.\n
+        3. <b>Jawab pertanyaan</b>, lalu tekan <b>tombol \n\t\t\tSelanjutnya</b> untuk lanjut ke soal berikutnya!
     </string>
-    <string name="exit">Exit</string>
-    <string name="maintenance">Maintenance</string>
+    <string name="exit">Selesai</string>
+    <string name="maintenance">Sedang dalam Perbaikan</string>
 
 </resources>

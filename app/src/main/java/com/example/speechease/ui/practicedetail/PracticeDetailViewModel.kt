@@ -87,12 +87,10 @@ class PracticeDetailViewModel(
                 contentId = contentIdValue,
                 token = token
             )
-            Log.d("PracticeDetailViewModel", "Request URL: https://speechease-iw10810.et.r.appspot.com/feedback")
             Log.d("PracticeDetailViewModel", "Request Payload: userId=$userId, contentId=$contentId, token=$token")
             Log.d("PracticeDetailViewModel", "Respons dari API: $response")
             if (response.isSuccessful && response.body() != null) {
                 val audioResponse = response.body()!!
-                // Correctly access predicted_label from feedback
                 val label = audioResponse.feedback?.predictedLabel ?: "Label tidak tersedia"
 
                 Log.d("PracticeDetailViewModel", "Predicted Label: $label")

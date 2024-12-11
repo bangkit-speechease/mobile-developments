@@ -40,7 +40,7 @@ class WelcomeActivity : AppCompatActivity() {
                 startActivity(Intent(this@WelcomeActivity, MainActivity::class.java))
                 finish()
             } else {
-                Log.d("WelcomeActivity", "Pengguna belum login atau token kosong.")
+                Log.d("WelcomeActivity", "Pengguna belum masuk atau token kosong.")
             }
         }
     }

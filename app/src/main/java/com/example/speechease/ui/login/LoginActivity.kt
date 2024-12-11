@@ -38,7 +38,7 @@ class LoginActivity : AppCompatActivity() {
 
                     AlertDialog.Builder(this).apply {
                         setTitle("Yeah!")
-                        setMessage("Anda berhasil login. Yuk mulai belajar!") // Sesuaikan pesan
+                        setMessage("Kamu berhasil masuk. Yuk mulai belajar!")
                         setPositiveButton("Lanjut") { _, _ ->
                             val intent = Intent(context, MainActivity::class.java)
                             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
@@ -63,7 +63,7 @@ class LoginActivity : AppCompatActivity() {
             val password = binding.passwordEditText.text.toString()
 
             if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, "Email dan password harus di isi", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Email dan kata sandi harus diisi", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 

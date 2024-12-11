@@ -26,7 +26,7 @@
             android:id="@+id/tv_guide"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Perhatikan Tutorial Ini Ya"
+            android:text="@string/guide_title"
             android:textSize="18sp"
             android:textStyle="bold"
             android:fontFamily="@font/poppinsmedium"
