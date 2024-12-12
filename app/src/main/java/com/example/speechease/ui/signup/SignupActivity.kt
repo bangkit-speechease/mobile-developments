@@ -56,7 +56,7 @@ class SignupActivity : AppCompatActivity() {
 
                         AlertDialog.Builder(this@SignupActivity).apply {
                             setTitle("Yeah!")
-                            setMessage("Akun dengan email $email sudah jadi nih.")
+                            setMessage("Akun dengan email $email sudah jadi nih. Silahkan cek emailmu untuk verifikasi ya.")
                             setPositiveButton("Lanjut") { _, _ ->
                                 startActivity(
                                     Intent(
